@@ -21,6 +21,8 @@ export class SecretViewerComponent implements OnInit {
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get('id');
         const key = this.route.snapshot.paramMap.get('key');
-        this.secretService.getSecret(id, key).subscribe((secret: Secret) => this.secret = secret);
+        this.secretService.getSecret(id, key).subscribe((secret: Secret) => {
+            this.secret = secret;
+        });
     }
 }
