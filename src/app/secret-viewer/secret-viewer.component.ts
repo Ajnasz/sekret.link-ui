@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+/* import { Location } from '@angular/common'; */
 
 import { Secret } from '../secret';
 import { SecretService } from '../secret.service';

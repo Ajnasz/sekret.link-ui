@@ -1,10 +1,35 @@
 import { Injectable } from '@angular/core';
-import { InMemoryDbService, RequestInfo, ResponseOptions, STATUS, getStatusText } from 'angular-in-memory-web-api';
+import { Observable } from 'rxjs';
+import {
+  HttpRequest,
+  HttpHeaders,
+} from '@angular/common/http';
+import {
+  InMemoryDbService,
+  RequestInfo,
+  ResponseOptions,
+  STATUS,
+  getStatusText,
+  ParsedRequestUrl,
+} from 'angular-in-memory-web-api';
 
 import { Secret } from './secret';
 
+function uuidv4(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    /* tslint:disable:no-bitwise */
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    /*tslint:enable*/
+    return v.toString(16);
+  });
+}
+
+type SecretActions = 'has' | 'read';
+
 interface SecretRequestData {
     collectionName: string;
+    action: SecretActions;
     id: string;
     params: string[];
 }
@@ -14,60 +39,100 @@ interface SecretRequestData {
   providedIn: 'root'
 })
 export class InMemoryDataService implements InMemoryDbService {
-  createDb(): Secret {
-    return {
-        Data: 'adsf',
-        Created: new Date(),
-    };
+  createDb(): {secret: Secret[]} {
+    const secret = JSON.parse(window.localStorage.getItem('secret')) || [];
+    return { secret };
   }
+
+/*   parseRequestUrl(url: string): ParsedRequestUrl { */
+/*     console.log(this); */
+/*     return { */
+/*     } */
+/*   } */
 
   private getRequestData(reqInfo: RequestInfo): SecretRequestData {
-      const plainURL = reqInfo.url.replace(reqInfo.apiBase, '');
-      const parts = plainURL.split('/');
-      const out: SecretRequestData = {
-          collectionName: parts[0],
-          id: parts[1],
-          params: parts.slice(2),
-      };
-      return out;
+    console.log(this);
+    const plainURL = reqInfo.url.replace(reqInfo.apiBase, '');
+    const parts = plainURL.split('/');
+    const out: SecretRequestData = {
+      collectionName: parts[0],
+      action: parts[1] as SecretActions,
+      id: parts[2],
+      params: parts.slice(3),
+    };
+    return out;
   }
 
-  private getData(requestData: SecretRequestData): object {
-      if (requestData.collectionName === 'secret') {
-          if (requestData.params[0]) {
-              return {
-                  Data: 'adsf',
-                  Created: new Date(),
-              };
+  private getData(reqInfo: RequestInfo): object {
+    const requestData = this.getRequestData(reqInfo);
+    console.log('requestData', requestData);
+
+    if (requestData.collectionName === 'secret') {
+      const item = reqInfo.collection.find((s: Secret) => s.ID === requestData.id);
+      switch (requestData.action) {
+        case 'has':
+          if (item) {
+            return {
+              Created: item.Created,
+            };
           }
+          break;
+        case 'read':
+          return item;
+          break;
       }
-      return undefined;
+      if (requestData.params[0]) {
+        return {
+          Data: 'adsf',
+          Created: new Date(),
+        };
+      }
+    }
+    return undefined;
   }
 
   private createResponse(reqInfo: RequestInfo): ResponseOptions {
-      const dataEncapsulation = reqInfo.utils.getConfig().dataEncapsulation;
+    const dataEncapsulation = reqInfo.utils.getConfig().dataEncapsulation;
 
-      const requestData = this.getRequestData(reqInfo);
-      console.log('requestData', requestData);
-
-      const data = this.getData(requestData);
-      const options: ResponseOptions = {
-          body: dataEncapsulation ? { data } : data,
-          status: STATUS.OK,
-      };
+    const data = this.getData(reqInfo);
+    const options: ResponseOptions = {
+      body: dataEncapsulation ? { data } : data,
+      status: STATUS.OK,
+    };
 
 
-      options.statusText = getStatusText(options.status);
-      options.headers = reqInfo.headers;
-      options.url = reqInfo.url;
+    options.statusText = getStatusText(options.status);
+    options.url = reqInfo.url;
 
-      return options;
+    return options;
   }
 
-  get(reqInfo: RequestInfo) {
-      return reqInfo.utils.createResponse$(() => this.createResponse(reqInfo));
+  get(reqInfo: RequestInfo): Observable<Secret> {
+    return reqInfo.utils.createResponse$(() => this.createResponse(reqInfo));
   }
-  genId(secret: Secret): string {
-      return 'asdfdsfasdf-' + secret.Created.getTime();
+
+  getJSONBody(req: HttpRequest<any>): Secret {
+    return req.body;
+  }
+
+  post(reqInfo: RequestInfo): Observable<string> {
+    const { req } = reqInfo;
+    const data = this.getJSONBody(req as HttpRequest<any>);
+    data.Created = new Date();
+    data.ID = this.genId();
+    console.log('erequinfo', reqInfo);
+    data.Key =  (Math.round(Math.random() * 1e16)).toString(16) +  (Math.round(Math.random() * 1e16)).toString(16);
+    /* data.Id = this.genId(); */
+    reqInfo.collection.push(data);
+    window.localStorage.setItem('secret', JSON.stringify(reqInfo.collection));
+    /* const body = "OK"; */
+    const headers =  new HttpHeaders({ 'Content-Type': 'application/json' });
+    const response = { body: data, status: STATUS.CREATED, headers };
+    return reqInfo.utils.createResponse$(() => response);
+  }
+
+  genId(): string {
+    console.log('gen id');
+    return uuidv4();
   }
 }
