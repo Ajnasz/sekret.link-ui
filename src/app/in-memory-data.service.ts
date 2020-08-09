@@ -54,6 +54,7 @@ export class InMemoryDataService implements InMemoryDbService {
     console.log(this);
     const plainURL = reqInfo.url.replace(reqInfo.apiBase, '');
     const parts = plainURL.split('/');
+    console.log('parts', reqInfo.url, parts);
     const out: SecretRequestData = {
       collectionName: parts[0],
       action: parts[1] as SecretActions,
@@ -63,46 +64,56 @@ export class InMemoryDataService implements InMemoryDbService {
     return out;
   }
 
-  private getData(reqInfo: RequestInfo): object {
-    const requestData = this.getRequestData(reqInfo);
-    console.log('requestData', requestData);
+  private getData(requestData: SecretRequestData, reqInfo: RequestInfo): Secret {
 
     if (requestData.collectionName === 'secret') {
       const item = reqInfo.collection.find((s: Secret) => s.ID === requestData.id);
-      switch (requestData.action) {
-        case 'has':
-          if (item) {
-            return {
-              Created: item.Created,
-            };
-          }
-          break;
-        case 'read':
-          return item;
-          break;
+
+      if (item && requestData.action === 'read') {
+        window.localStorage.setItem('secret', JSON.stringify(reqInfo.collection.filter((s: Secret) => s !== item)));
       }
-      if (requestData.params[0]) {
-        return {
-          Data: 'adsf',
-          Created: new Date(),
-        };
-      }
+      return item;
     }
     return undefined;
   }
 
   private createResponse(reqInfo: RequestInfo): ResponseOptions {
-    const dataEncapsulation = reqInfo.utils.getConfig().dataEncapsulation;
+    const requestData = this.getRequestData(reqInfo);
+    const data = this.getData(requestData, reqInfo);
 
-    const data = this.getData(reqInfo);
-    const options: ResponseOptions = {
-      body: dataEncapsulation ? { data } : data,
-      status: STATUS.OK,
-    };
+    let options: ResponseOptions = null;
 
+    if (!data) {
+      options = {
+        body: 'Not found',
+        status: STATUS.NOT_FOUND,
+      };
+    } else {
+      if (requestData.action === 'has') {
+        options = {
+          status: STATUS.OK,
+          body: {
+            ID: data.ID,
+            Data: null,
+            Created: data.Created,
+          }
+        };
+      } else {
+        if (data.Key === requestData.params[0]) {
+          options = {
+            status: STATUS.OK,
+            body: data,
+          };
+        } else {
+          options = {
+            body: 'Unauthorized',
+            status: STATUS.UNAUTHORIZED,
+          };
+        }
+      }
+    }
 
     options.statusText = getStatusText(options.status);
-    options.url = reqInfo.url;
 
     return options;
   }

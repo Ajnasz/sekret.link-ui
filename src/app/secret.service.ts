@@ -29,6 +29,7 @@ export class SecretService {
    */
   private handleError<T>(operation = 'operation', result?: T): (_: any) => Observable<T> {
     return (error: any): Observable<T> => {
+      console.log('error', error);
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
 
@@ -40,7 +41,13 @@ export class SecretService {
   hasSecret(secretID: string): Observable<Secret> {
     return this.http.get<Secret>(`${this.secretsURL}/has/${secretID}`)
     .pipe(
-      tap(_ => console.log(`has secret ${secretID}`)),
+      tap((secret: Secret) => {
+        if (secret) {
+          console.log(`has secret ${secret.ID}`);
+        } else {
+          console.error('has secret error', secret);
+        }
+      }),
         catchError(this.handleError<Secret>('hasSecret')));
   }
 
