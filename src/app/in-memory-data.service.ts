@@ -69,7 +69,7 @@ export class InMemoryDataService implements InMemoryDbService {
     if (requestData.collectionName === 'secret') {
       const item = reqInfo.collection.find((s: Secret) => s.ID === requestData.id);
 
-      if (item && requestData.action === 'read') {
+      if (item && requestData.action === 'read' && requestData.params[0] === item.Key) {
         window.localStorage.setItem('secret', JSON.stringify(reqInfo.collection.filter((s: Secret) => s !== item)));
       }
       return item;

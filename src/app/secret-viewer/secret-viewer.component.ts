@@ -5,6 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Secret } from '../secret';
 import { SecretService } from '../secret.service';
 
+import {
+  HttpErrorResponse,
+} from '@angular/common/http';
+
 @Component({
   selector: 'app-secret-viewer',
   templateUrl: './secret-viewer.component.html',
@@ -12,6 +16,7 @@ import { SecretService } from '../secret.service';
 })
 export class SecretViewerComponent implements OnInit {
     secret: Secret;
+    requestError: HttpErrorResponse;
 
     constructor(
         private secretService: SecretService,
@@ -20,16 +25,15 @@ export class SecretViewerComponent implements OnInit {
 
     readSecret(secret: Secret): void {
         const key = this.route.snapshot.paramMap.get('key');
-        this.secretService.getSecret(secret.ID, key).subscribe((secret: Secret) => {
-            this.secret = secret;
-        });
+        this.secretService.getSecret(secret.ID, key).subscribe((secretWithData: Secret) => {
+            this.secret = secretWithData;
+        }, (err) => this.requestError = err);
     }
 
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get('id');
-        /* const key = this.route.snapshot.paramMap.get('key'); */
         this.secretService.hasSecret(id).subscribe((secret: Secret) => {
             this.secret = secret;
-        });
+        }, (err) => this.requestError = err);
     }
 }
