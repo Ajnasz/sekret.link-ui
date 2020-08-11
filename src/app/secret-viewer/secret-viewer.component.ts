@@ -18,6 +18,22 @@ export class SecretViewerComponent implements OnInit {
     secret: Secret;
     requestError: HttpErrorResponse;
 
+    get hasSecret(): boolean {
+      return !!this.secret;
+    }
+
+    get hasSecretData(): boolean {
+      return this.hasSecret && !!this.secret.Data;
+    }
+
+    get isSecretRevelViewEnabled(): boolean {
+      return this.hasSecret && !this.secret.Data;
+    }
+
+    get isSecretViewEnabled(): boolean {
+      return this.hasSecretData;
+    }
+
     constructor(
         private secretService: SecretService,
         private route: ActivatedRoute,

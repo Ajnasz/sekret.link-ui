@@ -11,6 +11,7 @@ import { SecretComponent } from './secret/secret.component';
 import { SecretWriterComponent } from './secret-writer/secret-writer.component';
 import { SecretSummaryComponent } from './secret-summary/secret-summary.component';
 import { InMemoryDataService } from './in-memory-data.service';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { InMemoryDataService } from './in-memory-data.service';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
         InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    IonicModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
