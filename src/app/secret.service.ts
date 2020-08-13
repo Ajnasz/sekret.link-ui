@@ -29,12 +29,17 @@ export class SecretService {
    */
   private handleError<T>(operation = 'operation', result?: T): (_: any) => Observable<T> {
     return (error: any): Observable<T> => {
-      console.log('error', error);
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
+      console.log(result);
 
-      return throwError(error)
+      return throwError(error);
     };
+  }
+
+  isValidKey(key: string): boolean {
+    console.log('is valid key', key, /[a-z0-9]{27}/.test(key));
+    return /[a-z0-9]{26,27}/.test(key);
   }
 
   hasSecret(secretID: string): Observable<Secret> {

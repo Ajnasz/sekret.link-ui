@@ -12,6 +12,7 @@ import { SecretWriterComponent } from './secret-writer/secret-writer.component';
 import { SecretSummaryComponent } from './secret-summary/secret-summary.component';
 import { InMemoryDataService } from './in-memory-data.service';
 import { IonicModule } from '@ionic/angular';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { IonicModule } from '@ionic/angular';
     SecretComponent,
     SecretWriterComponent,
     SecretSummaryComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

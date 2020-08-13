@@ -12,8 +12,9 @@ export class SecretWriterComponent implements OnInit {
     secret: Secret = null;
     newURL = '';
 
-    get hasURL(): boolean {
-        return this.newURL !== '';
+
+    get isSecretReady(): boolean {
+      return this.newURL !== '';
     }
 
     constructor(
@@ -24,7 +25,7 @@ export class SecretWriterComponent implements OnInit {
     onSubmit(): void {
         this.secretService.saveSecret(this.secret.Data).subscribe((secret: Secret) => {
           console.log('secret', secret);
-          this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.ID}/${secret.Key}`;
+          this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.ID}#${secret.Key}`;
         });
     }
 
