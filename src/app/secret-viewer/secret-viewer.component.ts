@@ -21,20 +21,16 @@ export class SecretViewerComponent implements OnInit {
     secretKey: string;
     secretID: string;
 
-    get hasSecret(): boolean {
-      return !!this.secret;
-    }
-
     get hasSecretData(): boolean {
-      return this.hasSecret && !!this.secret.Data;
-    }
-
-    get isSecretRevelViewEnabled(): boolean {
-      return this.hasSecret && !this.secret.Data;
+      return this.secret && !!this.secret.Data;
     }
 
     get isSecretViewEnabled(): boolean {
       return this.hasSecretData;
+    }
+
+    get isSecretRevelViewEnabled(): boolean {
+      return this.secretID && !this.isSecretViewEnabled
     }
 
     constructor(
@@ -43,9 +39,8 @@ export class SecretViewerComponent implements OnInit {
         private location: Location,
     ) {}
 
-    readSecret(secret: Secret): void {
-        const key = this.secretKey;
-        this.secretService.getSecret(secret.ID, key).subscribe((secretWithData: Secret) => {
+    readSecret(): void {
+        this.secretService.getSecret(this.secretID, this.secretKey).subscribe((secretWithData: Secret) => {
             this.secret = secretWithData;
         }, (err) => this.requestError = err);
     }
@@ -61,9 +56,6 @@ export class SecretViewerComponent implements OnInit {
 
         this.secretKey = hash;
         this.secretID = id;
-        this.secretService.hasSecret(id).subscribe((secret: Secret) => {
-            this.secret = secret;
-            this.location.replaceState('/hidden');
-        }, (err) => this.requestError = err);
+        this.location.replaceState('/hidden');
     }
 }

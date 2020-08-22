@@ -4,22 +4,23 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Secret } from './secret';
+import { environment } from './../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SecretService {
-  private secretsURL = 'api/secret';
+  private secretsURL = environment.apiURL;
 
   constructor(
     private http: HttpClient
   ) { }
 
-
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({
+      Accept: 'application/json'
+    }),
   };
-
 
   /**
    * Handle Http operation that failed.
@@ -42,21 +43,9 @@ export class SecretService {
     return /[a-z0-9]{26,27}/.test(key);
   }
 
-  hasSecret(secretID: string): Observable<Secret> {
-    return this.http.get<Secret>(`${this.secretsURL}/has/${secretID}`)
-    .pipe(
-      tap((secret: Secret) => {
-        if (secret) {
-          console.log(`has secret ${secret.ID}`);
-        } else {
-          console.error('has secret error', secret);
-        }
-      }),
-        catchError(this.handleError<Secret>('hasSecret')));
-  }
 
   getSecret(secretID: string, secretKey: string): Observable<Secret> {
-    return this.http.get<Secret>(`${this.secretsURL}/read/${secretID}/${secretKey}`)
+    return this.http.get<Secret>(`${this.secretsURL}/${secretID}/${secretKey}`, this.httpOptions)
       .pipe(
         tap(_ => console.log(`fetch secret ${secretID}`)),
         catchError(this.handleError<Secret>('getSecret'))
@@ -64,10 +53,9 @@ export class SecretService {
   }
 
   saveSecret(secret: string): Observable<Secret> {
-    console.log('save secret', secret);
-    return this.http.post<Secret>(`${this.secretsURL}`, {Data: secret, Created: null})
+    return this.http.post<Secret>(`${this.secretsURL}`, secret, this.httpOptions)
       .pipe(
-        tap(_ => console.log('create secret', secret)),
+        tap(res => console.log('create secret', secret, res)),
         catchError(this.handleError<Secret>('saveSecret'))
       );
   }
