@@ -20,7 +20,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SecretViewerComponent,
     SecretComponent,
     SecretWriterComponent,
-    SecretSummaryComponent,
     NotFoundComponent,
   ],
   imports: [
