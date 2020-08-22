@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { Secret } from './secret';
 
@@ -14,5 +14,13 @@ export class AppComponent {
         Data: 'Secret',
         Created: new Date(),
     };
-    title = 'Secret Note Share';
+
+    @ViewChild('navBurger') navBurger: ElementRef;
+    @ViewChild('navMenu') navMenu: ElementRef;
+
+    toggleNavbar(): void {
+      console.log('toggle navbar');
+      this.navBurger.nativeElement.classList.toggle('is-active');
+      this.navMenu.nativeElement.classList.toggle('is-active');
+    }
 }
