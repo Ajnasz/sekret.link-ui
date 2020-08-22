@@ -1,5 +1,5 @@
 export interface Secret {
-    ID?: string;
+    UUID?: string;
     Key?: string;
     Data: string;
     Expire?: Date;

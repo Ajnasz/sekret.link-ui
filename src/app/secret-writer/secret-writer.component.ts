@@ -25,7 +25,7 @@ export class SecretWriterComponent implements OnInit {
     onSubmit(): void {
         this.secretService.saveSecret(this.secret.Data).subscribe((secret: Secret) => {
           console.log('secret', secret);
-          this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.ID}#${secret.Key}`;
+          this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}`;
         });
     }
 

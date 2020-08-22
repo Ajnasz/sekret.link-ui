@@ -67,7 +67,7 @@ export class InMemoryDataService implements InMemoryDbService {
   private getData(requestData: SecretRequestData, reqInfo: RequestInfo): Secret {
 
     if (requestData.collectionName === 'secret') {
-      const item = reqInfo.collection.find((s: Secret) => s.ID === requestData.id);
+      const item = reqInfo.collection.find((s: Secret) => s.UUID === requestData.id);
 
       if (item && requestData.action === 'read' && requestData.params[0] === item.Key) {
         window.localStorage.setItem('secret', JSON.stringify(reqInfo.collection.filter((s: Secret) => s !== item)));
@@ -93,7 +93,7 @@ export class InMemoryDataService implements InMemoryDbService {
         options = {
           status: STATUS.OK,
           body: {
-            ID: data.ID,
+            ID: data.UUID,
             Data: null,
             Created: data.Created,
           }
@@ -130,7 +130,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const { req } = reqInfo;
     const data = this.getJSONBody(req as HttpRequest<any>);
     data.Created = new Date();
-    data.ID = this.genId();
+    data.UUID = this.genId();
     console.log('erequinfo', reqInfo);
     data.Key =  (Math.round(Math.random() * 1e16)).toString(16) +  (Math.round(Math.random() * 1e16)).toString(16);
     /* data.Id = this.genId(); */
