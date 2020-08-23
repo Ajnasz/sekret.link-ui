@@ -19,7 +19,6 @@ export class AppComponent {
     @ViewChild('navMenu') navMenu: ElementRef;
 
     toggleNavbar(): void {
-      console.log('toggle navbar');
       this.navBurger.nativeElement.classList.toggle('is-active');
       this.navMenu.nativeElement.classList.toggle('is-active');
     }
