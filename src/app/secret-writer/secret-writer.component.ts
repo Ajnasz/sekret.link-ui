@@ -11,7 +11,7 @@ import { SecretService } from '../secret.service';
 export class SecretWriterComponent implements OnInit {
     secret: Secret = null;
     newURL = '';
-
+    copied = false;
 
     get isSecretReady(): boolean {
       return this.newURL !== '';
@@ -36,6 +36,11 @@ export class SecretWriterComponent implements OnInit {
         el.select();
         document.execCommand('copy');
         document.body.removeChild(el);
+        this.copied = true;
+    }
+
+    enableCopy(): void {
+      this.copied = false;
     }
 
     ngOnInit(): void {
