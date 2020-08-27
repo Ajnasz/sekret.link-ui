@@ -12,6 +12,13 @@ export class SecretWriterComponent implements OnInit {
     secret: Secret = null;
     newURL = '';
     copied = false;
+    expirations = [
+      {text: '1 Hour', value: '1h'},
+      {text: '1 Day', value: '24h'},
+      {text: '1 Week', value: `${24 * 7}h`},
+      {text: '30 Days', value: `${24 * 7 * 30}h`},
+    ];
+    selectedExpiration = '1d';
 
     get isSecretReady(): boolean {
       return this.newURL !== '';
@@ -23,8 +30,7 @@ export class SecretWriterComponent implements OnInit {
     }
 
     onSubmit(): void {
-        this.secretService.saveSecret(this.secret.Data).subscribe((secret: Secret) => {
-          console.log('secret', secret);
+        this.secretService.saveSecret(this.secret.Data, this.selectedExpiration).subscribe((secret: Secret) => {
           this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}`;
         });
     }
@@ -41,6 +47,10 @@ export class SecretWriterComponent implements OnInit {
 
     enableCopy(): void {
       this.copied = false;
+    }
+
+    updateSelectedExpirateion(value: string): void {
+      this.selectedExpiration = value;
     }
 
     ngOnInit(): void {

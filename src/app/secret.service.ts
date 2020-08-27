@@ -32,14 +32,12 @@ export class SecretService {
     return (error: any): Observable<T> => {
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
-      console.log(result);
 
       return throwError(error);
     };
   }
 
   isValidKey(key: string): boolean {
-    console.log('is valid key', key, /[a-z0-9]{27}/.test(key));
     return /[a-z0-9]{26,27}/.test(key);
   }
 
@@ -52,10 +50,11 @@ export class SecretService {
       );
   }
 
-  saveSecret(secret: string): Observable<Secret> {
-    return this.http.post<Secret>(`${this.secretsURL}`, secret, this.httpOptions)
+  saveSecret(secret: string, expire?: string): Observable<Secret> {
+    const url = expire ? `${this.secretsURL}?expire=${expire}` : this.secretsURL;
+    return this.http.post<Secret>(url, secret, this.httpOptions)
       .pipe(
-        tap(res => console.log('create secret', secret, res)),
+        tap(res => console.log('secret created')),
         catchError(this.handleError<Secret>('saveSecret'))
       );
   }
