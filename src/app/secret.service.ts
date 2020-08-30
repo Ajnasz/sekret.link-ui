@@ -51,7 +51,7 @@ export class SecretService {
   }
 
   saveSecret(secret: string, expire?: string): Observable<Secret> {
-    const url = expire ? `${this.secretsURL}?expire=${expire}` : this.secretsURL;
+    const url = expire ? `${this.secretsURL}/?expire=${expire}` : this.secretsURL;
     return this.http.post<Secret>(url, secret, this.httpOptions)
       .pipe(
         tap(res => console.log('secret created')),
