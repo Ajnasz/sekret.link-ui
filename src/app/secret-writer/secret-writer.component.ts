@@ -61,7 +61,13 @@ export class SecretWriterComponent implements OnInit {
         this.secretService.saveSecret(this.secret.Data, this.selectedExpiration).subscribe((secret: Secret) => {
           this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}`;
         }, (error) => {
-          this.errorMessage = error.error;
+          let msg = error.statusText;
+
+          if (typeof error.error === 'string') {
+            msg = error.error;
+          }
+
+          this.errorMessage = msg;
         });
     }
 
