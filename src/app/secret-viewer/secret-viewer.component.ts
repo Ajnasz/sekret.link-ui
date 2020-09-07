@@ -44,7 +44,9 @@ export class SecretViewerComponent implements OnInit {
 
     readSecret(): void {
         this.secretService.getSecret(this.secretID, this.secretKey).subscribe((secretWithData: Secret) => {
-          secretWithData.Data = this.encoderService.decryptData(secretWithData.Data, this.clientKey);
+          if (this.clientKey) {
+            secretWithData.Data = this.encoderService.decryptData(secretWithData.Data, this.clientKey);
+          }
           this.secret = secretWithData;
         }, (err) => this.requestError = err);
     }
@@ -60,7 +62,7 @@ export class SecretViewerComponent implements OnInit {
         }
 
         this.secretKey = serverKey;
-        this.clientKey = clientKey;
+        this.clientKey = clientKey || '';
         this.secretID = id;
         this.location.replaceState('/hidden');
     }
