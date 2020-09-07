@@ -3,6 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 
 import { Secret } from '../secret';
 import { SecretService } from '../secret.service';
+import { EncoderService } from '../encoder.service';
 
 const ONE_HOUR = '1h';
 const ONE_DAY = '24h';
@@ -39,6 +40,7 @@ export class SecretWriterComponent implements OnInit {
 
     constructor(
         private secretService: SecretService,
+        private encoderService: EncoderService,
     ) {
     }
 
@@ -58,8 +60,11 @@ export class SecretWriterComponent implements OnInit {
           return;
         }
 
-        this.secretService.saveSecret(this.secret.Data, this.selectedExpiration).subscribe((secret: Secret) => {
-          this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}`;
+        const password = this.encoderService.generatePassword();
+        const encoded = this.encoderService.encryptData(this.secret.Data, password);
+
+        this.secretService.saveSecret(encoded, this.selectedExpiration).subscribe((secret: Secret) => {
+          this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}&${password}`;
         }, (error) => {
           let msg = error.statusText;
 

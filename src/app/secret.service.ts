@@ -14,7 +14,7 @@ export class SecretService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -28,7 +28,7 @@ export class SecretService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T>(operation = 'operation', result?: T): (_: any) => Observable<T> {
+  private handleError<T>(operation = 'operation', _?: T): (_: any) => Observable<T> {
     return (error: any): Observable<T> => {
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
@@ -54,7 +54,7 @@ export class SecretService {
     const url = expire ? `${this.secretsURL}/?expire=${expire}` : this.secretsURL;
     return this.http.post<Secret>(url, secret, this.httpOptions)
       .pipe(
-        tap(res => console.log('secret created')),
+        tap(_ => console.log('secret created')),
         catchError(this.handleError<Secret>('saveSecret'))
       );
   }

@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Secret } from '../secret';
 import { SecretService } from '../secret.service';
+import { EncoderService } from '../encoder.service';
 
 import {
   HttpErrorResponse,
@@ -19,6 +20,7 @@ export class SecretViewerComponent implements OnInit {
     requestError: HttpErrorResponse;
     clientError: Error;
     secretKey: string;
+    clientKey: string;
     secretID: string;
 
     get hasSecretData(): boolean {
@@ -30,31 +32,35 @@ export class SecretViewerComponent implements OnInit {
     }
 
     get isSecretRevelViewEnabled(): boolean {
-      return this.secretID && !this.isSecretViewEnabled
+      return this.secretID && !this.isSecretViewEnabled;
     }
 
     constructor(
         private secretService: SecretService,
+        private encoderService: EncoderService,
         private route: ActivatedRoute,
         private location: Location,
     ) {}
 
     readSecret(): void {
         this.secretService.getSecret(this.secretID, this.secretKey).subscribe((secretWithData: Secret) => {
-            this.secret = secretWithData;
+          secretWithData.Data = this.encoderService.decryptData(secretWithData.Data, this.clientKey);
+          this.secret = secretWithData;
         }, (err) => this.requestError = err);
     }
 
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get('id');
         const hash = this.location.path(true).split('#')[1];
+        const [serverKey, clientKey] = hash.split('&');
 
         if (!this.secretService.isValidKey(hash)) {
           this.clientError = new Error('Invalid key');
           return;
         }
 
-        this.secretKey = hash;
+        this.secretKey = serverKey;
+        this.clientKey = clientKey;
         this.secretID = id;
         this.location.replaceState('/hidden');
     }
