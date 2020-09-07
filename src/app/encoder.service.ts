@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as CryptoJS from 'crypto-js';
+import { AES, enc } from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +9,11 @@ export class EncoderService {
   constructor() { }
 
   encryptData(data: string, password: string): string {
-    return CryptoJS.AES.encrypt(data, password).toString();
+    return AES.encrypt(data, password).toString();
   }
 
   decryptData(data: string, password: string): string {
-    return CryptoJS.AES.decrypt(data, password).toString(CryptoJS.enc.Utf8);
+    return AES.decrypt(data, password).toString(enc.Utf8);
   }
 
   encodeKey(data: Uint8Array): string {
