@@ -13,6 +13,7 @@ import { SecretWriterComponent } from './secret-writer/secret-writer.component';
 import { IonicModule } from '@ionic/angular';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { PageFooterComponent } from './page-footer/page-footer.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
     SecretWriterComponent,
     NotFoundComponent,
     PrivacyComponent,
+    PageFooterComponent,
   ],
   imports: [
     BrowserModule,
