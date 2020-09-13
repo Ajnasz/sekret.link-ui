@@ -14,6 +14,7 @@ import { IonicModule } from '@ionic/angular';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { PageFooterComponent } from './page-footer/page-footer.component';
+import { APIDocumentationComponent } from './apidocumentation/apidocumentation.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PageFooterComponent } from './page-footer/page-footer.component';
     NotFoundComponent,
     PrivacyComponent,
     PageFooterComponent,
+    APIDocumentationComponent,
   ],
   imports: [
     BrowserModule,
