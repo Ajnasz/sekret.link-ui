@@ -1,0 +1,10 @@
+dl {
+  counter-reset: section;
+}
+dt:before{
+    counter-increment: section;
+    content: counter(section) ". ";
+}
+dd {
+  margin-bottom: 3rem;
+}
