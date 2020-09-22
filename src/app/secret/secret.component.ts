@@ -10,6 +10,11 @@ import { Secret } from '../secret';
 export class SecretComponent implements OnInit {
   @Input() secret: Secret;
   @Input() isReadonly = false;
+  @Input() label: string;
+
+  get hasLabel(): boolean {
+    return !!this.label;
+  }
 
   constructor() { }
 
