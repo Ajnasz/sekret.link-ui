@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+	"css-build": "node-sass --omit-source-map-url src/scss/bulma.scss src/assets/bulma.css",
+	"css-watch": "npm run css-build -- --watch"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +23,6 @@
     "@angular/router": "~10.0.0",
     "@ionic/angular": "^5.3.1",
     "angular-in-memory-web-api": "^0.11.0",
-    "bulma": "^0.9.0",
     "crypto-js": "^4.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
@@ -36,6 +37,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "bulma": "^0.9.0",
     "codelyzer": "^6.0.0-next.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -44,6 +46,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "node-sass": "^4.14.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",

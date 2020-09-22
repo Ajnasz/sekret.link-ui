@@ -29,8 +29,8 @@
               }
             ],
             "styles": [
-              "node_modules/bulma/css/bulma.min.css",
               "src/styles.css",
+              "src/assets/bulma.css",
               {
                 "input": "node_modules/@ionic/angular/css/normalize.css"
               },
