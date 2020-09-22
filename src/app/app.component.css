@@ -7,3 +7,15 @@
 .footer {
 	padding: 1rem 3rem;
 }
+.sekret-logo {
+	max-height: 15vh;
+}
+.sekret-logo-container {
+	display: block;
+	margin: auto;
+	text-align: center;
+	margin-bottom: 1.5rem;
+	background-color: #000;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}

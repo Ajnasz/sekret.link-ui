@@ -1,21 +1,4 @@
-<nav class="navbar is-dark">
-  <header class="navbar-brand">
-    <a class="navbar-item" routerLink="/">
-      <img src="/assets/lock.svg" width="28" height="28" alt="Sekret.link Logo">
-    </a>
-
-    <a (click)="toggleNavbar()" #navBurger role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </header>
-  <div class="navbar-menu" #navMenu>
-    <div class="navbar-start">
-      <a class="navbar-item" routerLink="/create">Create secret</a>
-    </div>
-  </div>
-</nav>
+<a routerLink="/create" class="sekret-logo-container"><img src="/assets/sekret-link-vice-city.png" class="sekret-logo"></a>
 <div class="columns">
 	<div class="column is-three-fifths is-offset-one-fifth">
 		<main class="bd-main">
