@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-	"css-build": "node-sass --omit-source-map-url src/scss/bulma.scss src/assets/bulma.css",
-	"css-watch": "npm run css-build -- --watch"
+    "css-build": "node-sass --omit-source-map-url src/scss/bulma.scss src/assets/bulma.css",
+    "css-watch": "npm run css-build -- --watch"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +21,6 @@
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
-    "@ionic/angular": "^5.3.1",
     "angular-in-memory-web-api": "^0.11.0",
     "crypto-js": "^4.0.0",
     "rxjs": "~6.5.5",
@@ -32,7 +31,6 @@
     "@angular-devkit/build-angular": "~0.1000.0",
     "@angular/cli": "~10.0.0",
     "@angular/compiler-cli": "~10.0.0",
-    "@ionic/angular-toolkit": "^2.3.3",
     "@types/crypto-js": "^3.1.47",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",

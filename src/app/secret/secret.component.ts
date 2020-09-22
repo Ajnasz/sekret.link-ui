@@ -8,8 +8,8 @@ import { Secret } from '../secret';
   styleUrls: ['./secret.component.css']
 })
 export class SecretComponent implements OnInit {
-    @Input() secret: Secret;
-    @Input() isReadonly = false;
+  @Input() secret: Secret;
+  @Input() isReadonly = false;
 
   constructor() { }
 

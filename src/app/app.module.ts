@@ -10,11 +10,11 @@ import { SecretViewerComponent } from './secret-viewer/secret-viewer.component';
 import { SecretComponent } from './secret/secret.component';
 import { SecretWriterComponent } from './secret-writer/secret-writer.component';
 /* import { InMemoryDataService } from './in-memory-data.service'; */
-import { IonicModule } from '@ionic/angular';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { PageFooterComponent } from './page-footer/page-footer.component';
 import { APIDocumentationComponent } from './apidocumentation/apidocumentation.component';
+import { IcomoonIconComponent } from './icomoon-icon/icomoon-icon.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { APIDocumentationComponent } from './apidocumentation/apidocumentation.c
     PrivacyComponent,
     PageFooterComponent,
     APIDocumentationComponent,
+    IcomoonIconComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,6 @@ import { APIDocumentationComponent } from './apidocumentation/apidocumentation.c
     /* HttpClientInMemoryWebApiModule.forRoot( */
     /*     InMemoryDataService, { dataEncapsulation: false } */
     /* ), */
-    IonicModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
