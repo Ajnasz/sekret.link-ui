@@ -12,13 +12,13 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="171.38005mm"
-   height="117.18178mm"
-   viewBox="0 0 171.38005 117.18178"
+   height="120.07087mm"
+   viewBox="0 0 171.38005 120.07087"
    version="1.1"
    id="svg845"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="sekret-link-vice-city.svg"
-   inkscape:export-filename="/home/ajnasz/src/1noteui/note-ui/src/assets/sekret-link-vice-city.png"
+   inkscape:export-filename="/home/ajnasz/src/1noteui/note-ui/src/assets/sekret-link-vice-city-2.png"
    inkscape:export-xdpi="139.39101"
    inkscape:export-ydpi="139.39101">
   <defs
@@ -150,7 +150,7 @@
        y1="383.11438"
        x2="687.52991"
        y2="383.11438"
-       gradientTransform="matrix(0.26458333,0,0,0.26458333,9.8361344,98.192695)" />
+       gradientTransform="matrix(0.26458333,0,0,0.26458333,9.8361344,104.54272)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3319"
@@ -160,7 +160,7 @@
        y1="375.12421"
        x2="658.42725"
        y2="367.98135"
-       gradientTransform="matrix(0.26458333,0,0,0.26458333,9.8361344,98.192695)" />
+       gradientTransform="matrix(0.26458333,0,0,0.26458333,9.8361344,104.54272)" />
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient868"
@@ -182,9 +182,9 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
      inkscape:cx="271.56115"
-     inkscape:cy="187.99557"
+     inkscape:cy="208.17478"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:window-width="1596"
      inkscape:window-height="848"
@@ -212,32 +212,34 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-20.365051,-97.467448)">
+     transform="translate(-20.365051,-100.92828)">
     <path
        d="m 71.354732,117.4536 c -6.4608,7.65816 -9.90323,17.03754 -10.10279,27.41473 -0.22451,14.04412 5.46299,26.46681 16.11457,35.023 12.5973,10.10279 28.212968,12.5973 43.678968,6.90981 11.37499,-4.19079 21.67734,-14.99204 25.56879,-26.71627 1.72121,-5.16364 2.29495,-9.2297 2.29495,-15.21654 -0.0748,-8.35663 -1.97067,-15.14171 -6.26123,-22.37581 -1.79605,-2.99342 -2.39474,-3.74177 -6.36102,-7.65816 -5.01397,-4.96409 -7.83278,-6.93475 -13.29577,-9.30454 -5.81222,-2.51947 -10.60169,-3.56716 -17.06249,-3.69189 -13.545218,-0.27439 -25.843178,5.28838 -34.573978,15.61567 z m 22.50053,9.62883 c 4.16584,-1.22231 8.481348,-0.19956 11.449828,2.76891 1.4967,1.44682 1.89583,2.0954 2.56935,4.11595 0.44901,1.29715 0.7733,3.26782 0.69846,4.34046 l -0.0998,1.94572 c 5.14581,4.21958 18.24839,12.93054 20.04667,13.2274 0,0 -0.10962,0.52388 -7.5242,8.07577 -6.23629,6.35177 -8.08223,7.93256 -8.30674,7.65816 0.0653,-2.64018 -8.04075,-12.52585 -12.871698,-20.15569 l -2.02056,0.12473 c -4.26562,0.2744 -9.0052,-2.61924 -10.80125,-6.56058 -1.39693,-3.14309 -1.37198,-6.61046 0.0998,-9.87828 0.37418,-0.7733 1.34704,-1.94572 2.64419,-3.14309 1.72121,-1.57154 2.44462,-2.0455 4.11595,-2.51946 z"
        id="path883"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccccccccccccccsccccccc"
-       style="opacity:1;fill:url(#radialGradient872);fill-opacity:1;stroke:url(#linearGradient3305);stroke-width:1.79999995;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="opacity:1;fill:url(#radialGradient872);fill-opacity:1;stroke:url(#linearGradient3305);stroke-width:1.79999995;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-xdpi="139.39101"
+       inkscape:export-ydpi="139.39101" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
-     transform="translate(-20.365051,-97.467448)">
+     transform="translate(-20.365051,-100.92828)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;opacity:1;fill:url(#linearGradient904);fill-opacity:1;stroke:url(#linearGradient906);stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        x="21.175495"
-       y="210.77315"
+       y="217.12306"
        id="text902"><tspan
          sodipodi:role="line"
          x="21.175495"
-         y="210.77315"
+         y="217.12306"
          id="tspan900"
          style="fill:url(#linearGradient904);stroke:url(#linearGradient906);stroke-width:1"><tspan
            x="21.175495"
-           y="210.77315"
+           y="217.12306"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:38.80555725px;font-family:arizonia;-inkscape-font-specification:arizonia;fill:url(#linearGradient904);fill-opacity:1;stroke:url(#linearGradient906);stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="tspan898">Sekret.Link</tspan></tspan></text>
   </g>
