@@ -10,7 +10,7 @@ $beige-lighter: #EFF0EB;
 // Update Bulma's global variables
 $grey-dark: $brown;
 $grey-light: $beige-light;
-$primary: $purple;
+$primary: $pink;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
@@ -39,3 +39,8 @@ $input-shadow: none;
 @import "../../node_modules/bulma/sass/layout/footer.sass";
 @import "../../node_modules/bulma/sass/layout/hero.sass";
 @import "../../node_modules/bulma/sass/helpers/_all";
+
+.button.is-primary:hover,
+.button.is-primary.is-hovered {
+	background-color: bulmaDarken($primary, 5.5%)
+}
