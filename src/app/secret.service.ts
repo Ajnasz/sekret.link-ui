@@ -10,7 +10,7 @@ import { environment } from './../environments/environment';
     providedIn: 'root'
 })
 export class SecretService {
-  private secretsURL = environment.apiURL;
+  private secretsURL = new URL(environment.apiURL);
 
   constructor(
     private http: HttpClient
@@ -43,7 +43,9 @@ export class SecretService {
 
 
   getSecret(secretID: string, secretKey: string): Observable<Secret> {
-    return this.http.get<Secret>(`${this.secretsURL}/${secretID}/${secretKey}`, this.httpOptions)
+    const url = new URL(this.secretsURL.href);
+    url.pathname += `${secretID}/${secretKey}`;
+    return this.http.get<Secret>(url.href, this.httpOptions)
       .pipe(
         tap(_ => console.log(`fetch secret ${secretID}`)),
         catchError(this.handleError<Secret>('getSecret'))
@@ -51,8 +53,11 @@ export class SecretService {
   }
 
   saveSecret(secret: string, expire?: string): Observable<Secret> {
-    const url = expire ? `${this.secretsURL}/?expire=${expire}` : this.secretsURL;
-    return this.http.post<Secret>(url, secret, this.httpOptions)
+    const url = new URL(this.secretsURL.href);
+    if (expire !== '') {
+      url.search = `?expire=${expire}`;
+    }
+    return this.http.post<Secret>(url.href, secret, this.httpOptions)
       .pipe(
         tap(_ => console.log('secret created')),
         catchError(this.handleError<Secret>('saveSecret'))
