@@ -11,5 +11,12 @@
 </head>
 <body>
   <app-root></app-root>
+  <noscript>
+    <form action="/api/" method="post" enctype="multipart/form-data">
+        <label for="secret">secret</label><br>
+        <textarea name="secret" id="secret" rows="5" cols="40"></textarea><br>
+      <button type="submit">Create secret</button>
+    </form>
+  </noscript>
 </body>
 </html>
