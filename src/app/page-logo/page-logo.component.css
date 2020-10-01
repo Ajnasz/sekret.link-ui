@@ -1,0 +1,13 @@
+.sekret-logo-container {
+	display: block;
+	margin: auto;
+	text-align: center;
+	margin-bottom: 1.5rem;
+	background-color: #222;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.sekret-logo {
+	max-height: 15vh;
+}
