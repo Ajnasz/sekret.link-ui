@@ -1,22 +1,35 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Sekret Link</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#801176">
-  <meta name="description" content="Share sensitive information securely via a link that is available only one time. Useful to keep secrets out of chat logs or emails.">
-  <link rel="icon" type="image/svg" href="/assets/icon.png">
-</head>
-<body>
-  <app-root></app-root>
-  <noscript>
-    <form action="/api/" method="post" enctype="multipart/form-data">
-        <label for="secret">secret</label><br>
-        <textarea name="secret" id="secret" rows="5" cols="40"></textarea><br>
-      <button type="submit">Create secret</button>
-    </form>
-  </noscript>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Sekret Link</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#801176">
+    <meta name="description" content="Share sensitive information securely via a link that is available only one time. Useful to keep secrets out of chat logs or emails.">
+    <link rel="icon" type="image/png" href="/assets/icon.png">
+  </head>
+  <body>
+    <app-root></app-root>
+    <noscript>
+      <link rel="stylesheet" href="/assets/bulma.css">
+      <section class="content container section">
+        <form action="/api/" method="post" enctype="multipart/form-data">
+          <h2 class="is-title is-4">New secret</h2>
+          <div class="field">
+            <label class="label" for="secret">Secret</label>
+            <div class="control">
+              <textarea class="textarea" name="secret" id="secret" rows="5" cols="50" placeholder="Secret message or password"></textarea>
+            </div>
+          </div>
+          <div class="buttons">
+            <button class="button is-primary" type="submit">Create secret</button>
+          </div>
+          <p class="is-size-7">Enter the message or password you want to share securely. After you submitted the message by pressing the "Create secret" button, you will get a link. Send this link to your messaging partner so she can read the secret message.</p>
+          <p class="is-size-7"><strong>Attention!</strong> The message can be read only once! After it's read, the message will be destroyed and can not be restored.<br>
+			  Also note that <strong>if you send the link through an application which provides preview of websites, it may</strong> tries to download and create preview for this link as well by fetcing the URL. It means that this third party tool will <strong>read and destroy the secret</strong>. To pervent it, it's suggested to <strong>use the JavaScript enabled version of the application</strong> which can address this issue with add some additional mechanism.</p>
+        </form>
+      </section>
+    </noscript>
+  </body>
 </html>
