@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { Secret } from '../secret';
 import { SecretService } from '../secret.service';
 import { EncoderService } from '../encoder.service';
+import { TitleService } from '../title.service';
 
 const ONE_HOUR = '1h';
 const ONE_DAY = '24h';
@@ -39,9 +40,12 @@ export class SecretWriterComponent implements OnInit {
     }
 
     constructor(
-        private secretService: SecretService,
-        private encoderService: EncoderService,
+      private secretService: SecretService,
+      private encoderService: EncoderService,
+      private location: Location,
+      private titleService: TitleService,
     ) {
+      this.titleService.setTitle('Share a secret');
     }
 
     validateSecret(): boolean {
