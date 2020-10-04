@@ -11,10 +11,9 @@ export class APIDocumentationComponent implements OnInit {
 
   constructor(
     private titleService: TitleService,
-  ) {
-    this.titleService.setTitle('API Documentation');
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('API Documentation');
   }
 }

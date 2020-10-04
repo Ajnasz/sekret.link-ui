@@ -54,6 +54,7 @@ export class SecretViewerComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle('View secret');
         const id = this.route.snapshot.paramMap.get('id');
         const hash = this.location.path(true).split('#')[1];
         const [serverKey, clientKey] = hash.split('&');

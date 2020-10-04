@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 /* import { Secret } from '../secret'; */
 import { SecretMemoryStoreService } from '../secret-memory-store.service';
+import { TitleService } from '../title.service';
 
 @Component({
   selector: 'app-secret-created',
@@ -15,6 +16,7 @@ export class SecretCreatedComponent implements OnInit {
 
   constructor(
     private memoryStore: SecretMemoryStoreService,
+    private titleService: TitleService,
   ) {}
 
   copySecretUrl(url: string): void {
@@ -38,9 +40,11 @@ export class SecretCreatedComponent implements OnInit {
 
       if (secret && secret.UUID && secret.Key && password) {
         this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}&${password}`;
+        this.titleService.setTitle('Secret created');
         return;
       }
     }
     this.errorMessage = 'Secret not found';
+    this.titleService.setTitle('Secret not found');
   }
 }

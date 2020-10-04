@@ -40,8 +40,7 @@ export class SecretWriterComponent implements OnInit {
       private router: Router,
       private titleService: TitleService,
       private memoryStore: SecretMemoryStoreService,
-    ) {
-    }
+    ) { }
 
     validateSecret(): boolean {
       if (this.secret.Data === '') {
@@ -82,6 +81,7 @@ export class SecretWriterComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.titleService.setTitle('Share a secret');
       this.secret = {
         Data: '',
         Created: null,
