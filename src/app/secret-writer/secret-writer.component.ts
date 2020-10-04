@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { Secret } from '../secret';
 import { SecretService } from '../secret.service';
 import { EncoderService } from '../encoder.service';
 import { TitleService } from '../title.service';
+import { SecretMemoryStoreService } from '../secret-memory-store.service';
 
 const ONE_HOUR = '1h';
 const ONE_DAY = '24h';
@@ -25,8 +26,6 @@ type ExpireDurationValue = {
 export class SecretWriterComponent implements OnInit {
     errorMessage = '';
     secret: Secret = null;
-    newURL = '';
-    copied = false;
     expirations: ExpireDurationValue[] = [
       {text: '1 Hour', value: ONE_HOUR},
       {text: '1 Day', value: ONE_DAY},
@@ -35,17 +34,13 @@ export class SecretWriterComponent implements OnInit {
     ];
     selectedExpiration: EXPIRE_DURATIONS = '24h';
 
-    get isSecretReady(): boolean {
-      return this.newURL !== '';
-    }
-
     constructor(
       private secretService: SecretService,
       private encoderService: EncoderService,
-      private location: Location,
+      private router: Router,
       private titleService: TitleService,
+      private memoryStore: SecretMemoryStoreService,
     ) {
-      this.titleService.setTitle('Share a secret');
     }
 
     validateSecret(): boolean {
@@ -68,7 +63,9 @@ export class SecretWriterComponent implements OnInit {
         const encoded = this.encoderService.encryptData(this.secret.Data, password);
 
         this.secretService.saveSecret(encoded, this.selectedExpiration).subscribe((secret: Secret) => {
-          this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}&${password}`;
+
+          this.memoryStore.store(secret, password);
+          this.router.navigate(['/created']);
         }, (error) => {
           let msg = error.statusText;
 
@@ -80,28 +77,14 @@ export class SecretWriterComponent implements OnInit {
         });
     }
 
-    copySecretUrl(url: string): void {
-        const el = document.createElement('textarea');
-        el.value = url;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-        this.copied = true;
-    }
-
-    enableCopy(): void {
-      this.copied = false;
-    }
-
     updateSelectedExpiration(value: EXPIRE_DURATIONS): void {
       this.selectedExpiration = value;
     }
 
     ngOnInit(): void {
-        this.secret = {
-            Data: '',
-            Created: null,
-        };
+      this.secret = {
+        Data: '',
+        Created: null,
+      };
     }
 }

@@ -42,9 +42,7 @@ export class SecretViewerComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         private titleService: TitleService,
-    ) {
-      this.titleService.setTitle('View secret');
-    }
+    ) { }
 
     readSecret(): void {
         this.secretService.getSecret(this.secretID, this.secretKey).subscribe((secretWithData: Secret) => {

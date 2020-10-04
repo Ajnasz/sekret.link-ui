@@ -3,12 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SecretWriterComponent } from './secret-writer/secret-writer.component';
 import { SecretViewerComponent } from './secret-viewer/secret-viewer.component';
+import { SecretCreatedComponent } from './secret-created/secret-created.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { APIDocumentationComponent } from './apidocumentation/apidocumentation.component';
 
 const routes: Routes = [
     {path: 'create', component: SecretWriterComponent},
+    {path: 'created', component: SecretCreatedComponent},
     {path: 'view/:id', component: SecretViewerComponent},
     {path: 'privacy', component: PrivacyComponent},
     {path: 'api-doc', component: APIDocumentationComponent},

@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+
+/* import { Secret } from '../secret'; */
+import { SecretMemoryStoreService } from '../secret-memory-store.service';
+
+@Component({
+  selector: 'app-secret-created',
+  templateUrl: './secret-created.component.html',
+  styleUrls: ['./secret-created.component.css']
+})
+export class SecretCreatedComponent implements OnInit {
+  newURL = '';
+  errorMessage = '';
+  copied = false;
+
+  constructor(
+    private memoryStore: SecretMemoryStoreService,
+  ) {}
+
+  copySecretUrl(url: string): void {
+      const el = document.createElement('textarea');
+      el.value = url;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      this.copied = true;
+  }
+
+  enableCopy(): void {
+    this.copied = false;
+  }
+
+  ngOnInit(): void {
+    const data = this.memoryStore.get();
+    if (data) {
+      const { secret, password } = data;
+
+      if (secret && secret.UUID && secret.Key && password) {
+        this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}&${password}`;
+        return;
+      }
+    }
+    this.errorMessage = 'Secret not found';
+  }
+}
