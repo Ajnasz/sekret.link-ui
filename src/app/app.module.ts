@@ -17,6 +17,7 @@ import { APIDocumentationComponent } from './apidocumentation/apidocumentation.c
 import { IcomoonIconComponent } from './icomoon-icon/icomoon-icon.component';
 import { PageLogoComponent } from './page-logo/page-logo.component';
 import { SecretCreatedComponent } from './secret-created/secret-created.component';
+import { PageErrorComponent } from './page-error/page-error.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SecretCreatedComponent } from './secret-created/secret-created.componen
     IcomoonIconComponent,
     PageLogoComponent,
     SecretCreatedComponent,
+    PageErrorComponent,
   ],
   imports: [
     BrowserModule,
