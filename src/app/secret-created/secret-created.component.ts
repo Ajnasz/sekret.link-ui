@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-/* import { Secret } from '../secret'; */
+import { Secret } from '../secret';
 import { SecretMemoryStoreService } from '../secret-memory-store.service';
 import { TitleService } from '../title.service';
 
@@ -10,7 +10,10 @@ import { TitleService } from '../title.service';
   styleUrls: ['./secret-created.component.css']
 })
 export class SecretCreatedComponent implements OnInit {
-  newURL = '';
+  newURL: URL;
+  secret: Secret;
+  password: string;
+  decryptData: string;
   errorMessage = '';
   copied = false;
 
@@ -39,7 +42,9 @@ export class SecretCreatedComponent implements OnInit {
       const { secret, password } = data;
 
       if (secret && secret.UUID && secret.Key && password) {
-        this.newURL = `${window.location.protocol}//${window.location.host}/view/${secret.UUID}#${secret.Key}&${password}`;
+        this.secret = secret;
+        this.decryptData = `${secret.Key}&${password}`;
+        this.newURL = new URL(`/view/${secret.UUID}#${secret.Key}&${password}`, window.location.toString());
         this.titleService.setTitle('Secret created');
         return;
       }
