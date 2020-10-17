@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { TitleService } from '../title.service';
 
 @Component({
-  selector: 'app-apidocumentation',
-  templateUrl: './apidocumentation.component.html',
-  styleUrls: ['./apidocumentation.component.css']
+  selector: 'app-api-documentation',
+  templateUrl: './api-documentation.component.html',
+  styleUrls: ['./api-documentation.component.css']
 })
-export class APIDocumentationComponent implements OnInit {
+export class ApiDocumentationComponent implements OnInit {
 
   constructor(
     private titleService: TitleService,
@@ -16,4 +16,5 @@ export class APIDocumentationComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle('API Documentation');
   }
+
 }

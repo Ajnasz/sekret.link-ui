@@ -6,18 +6,17 @@ import { SecretViewerComponent } from './secret-viewer/secret-viewer.component';
 import { SecretCreatedComponent } from './secret-created/secret-created.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
-import { APIDocumentationComponent } from './apidocumentation/apidocumentation.component';
 
 const routes: Routes = [
-    {path: 'create', component: SecretWriterComponent},
-    {path: 'created', component: SecretCreatedComponent},
-    {path: 'view/:id', component: SecretViewerComponent},
-    {path: 'privacy', component: PrivacyComponent},
-    {path: 'api-doc', component: APIDocumentationComponent},
-    {path: '404', component: NotFoundComponent},
-    {path: '', redirectTo: '/create', pathMatch: 'full'},
-    {path: 'hidden', redirectTo: '/create', pathMatch: 'full'},
-    {path: '**', redirectTo: '/404'}
+    { path: '', redirectTo: '/create', pathMatch: 'full' },
+    { path: 'create', component: SecretWriterComponent },
+    { path: 'created', component: SecretCreatedComponent },
+    { path: 'view/:id', component: SecretViewerComponent },
+    { path: 'privacy', component: PrivacyComponent },
+    { path: '404', component: NotFoundComponent },
+    { path: 'hidden', redirectTo: '/create', pathMatch: 'full' },
+    { path: 'api-doc', loadChildren: () => import('./api-documentation/api-documentation.module').then(m => m.ApiDocumentationModule) },
+    { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
