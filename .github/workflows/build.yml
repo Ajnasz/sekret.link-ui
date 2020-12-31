@@ -30,13 +30,13 @@ jobs:
           cd dist
           tar czf sekret.link-ui.tgz note-ui
 
-    - run: |
-        set -x
-        assets=()
-        for asset in dist/*.tgz; do
-          assets+=("-a" "$asset")
-        done
-        tag_name="${GITHUB_REF##*/}"
-        hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          set -x
+          assets=()
+          for asset in dist/*.tgz; do
+            assets+=("-a" "$asset")
+          done
+          tag_name="${GITHUB_REF##*/}"
+          hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
