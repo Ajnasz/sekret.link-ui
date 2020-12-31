@@ -27,9 +27,16 @@ jobs:
           npm i
           npm run css-build
           npm run build:prod
+          cd dist
+          tar czf sekret.link-ui.tgz note-ui
 
-      - name: Push Build to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "dist/angular-githubaction/*"
-          token: ${{ secrets.TOKEN }}
+    - run: |
+        set -x
+        assets=()
+        for asset in dist/*.tgz; do
+          assets+=("-a" "$asset")
+        done
+        tag_name="${GITHUB_REF##*/}"
+        hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
