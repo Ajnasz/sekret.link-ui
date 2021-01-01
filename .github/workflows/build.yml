@@ -1,8 +1,9 @@
-name: Build Angular
+name: Release
 
 on:
-  tags:
-  - 'v*'
+  push:
+    tags:
+    - 'v*'
 
 jobs:
   build:
