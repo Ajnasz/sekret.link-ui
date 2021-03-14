@@ -52,10 +52,18 @@ export class SecretService {
       );
   }
 
-  saveSecret(secret: string, expire?: string): Observable<Secret> {
+  saveSecret(secret: string, expire?: string, maxReads?: number): Observable<Secret> {
     const url = new URL(this.secretsURL.href);
+    const queries: string[] = [];
     if (expire !== '') {
-      url.search = `?expire=${expire}`;
+      queries.push(`expire=${expire}`);
+    }
+    if (maxReads > 0) {
+      queries.push(`maxReads=${maxReads}`);
+    }
+
+    if (queries.length > 0) {
+      url.search = `?${queries.join('&')}`;
     }
     return this.http.post<Secret>(url.href, secret, this.httpOptions)
       .pipe(

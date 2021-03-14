@@ -33,6 +33,11 @@ export class SecretWriterComponent implements OnInit {
       {text: '30 Days', value: THIRTY_DAYS},
     ];
     selectedExpiration: EXPIRE_DURATIONS = '24h';
+    maxReads = 1;
+
+    get shareWithTeam(): boolean {
+      return this.maxReads > 1;
+    }
 
     constructor(
       private secretService: SecretService,
@@ -61,7 +66,7 @@ export class SecretWriterComponent implements OnInit {
         const password = this.encoderService.generatePassword();
         const encoded = this.encoderService.encryptData(this.secret.Data, password);
 
-        this.secretService.saveSecret(encoded, this.selectedExpiration).subscribe((secret: Secret) => {
+        this.secretService.saveSecret(encoded, this.selectedExpiration, this.maxReads).subscribe((secret: Secret) => {
 
           this.memoryStore.store(secret, password);
           this.router.navigate(['/created']);
@@ -78,6 +83,10 @@ export class SecretWriterComponent implements OnInit {
 
     updateSelectedExpiration(value: EXPIRE_DURATIONS): void {
       this.selectedExpiration = value;
+    }
+
+    changeShareWithTeam(): void {
+      this.maxReads += 1;
     }
 
     ngOnInit(): void {
