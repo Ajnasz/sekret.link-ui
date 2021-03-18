@@ -74,6 +74,5 @@ export class SecretViewerComponent implements OnInit {
         this.clientKey = clientKey || '';
         this.secretID = id;
         this.location.replaceState('/hidden');
-
     }
 }
