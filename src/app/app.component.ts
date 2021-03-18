@@ -11,8 +11,10 @@ import { Secret } from './secret';
 })
 export class AppComponent {
     secret: Secret = {
-        Data: 'Secret',
-        Created: new Date(),
+      UUID: '',
+      Data: 'Secret',
+      Created: new Date(),
+      DeleteKey: '',
     };
 
     @ViewChild('navBurger') navBurger: ElementRef;

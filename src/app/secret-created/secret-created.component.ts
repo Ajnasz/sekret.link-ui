@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Secret } from '../secret';
+import { SecretService } from '../secret.service';
 import { SecretMemoryStoreService } from '../secret-memory-store.service';
 import { TitleService } from '../title.service';
 
@@ -16,11 +17,34 @@ export class SecretCreatedComponent implements OnInit {
   decryptData: string;
   errorMessage = '';
   copied = false;
+  private destroyProgress: 'progress' | 'finished' | null = null;
+  destroyed = false;
 
   constructor(
+    private secretService: SecretService,
     private memoryStore: SecretMemoryStoreService,
     private titleService: TitleService,
   ) {}
+
+  get canDestroySecret(): boolean {
+    return this.secret.DeleteKey !== '' && this.secret.UUID !== '' && this.secret.Key !== '';
+  }
+
+  get showCreatedMessage(): boolean {
+    return !this.errorMessage && this.destroyProgress === null;
+  }
+
+  get showDestroyMessage(): boolean {
+    return this.destroyProgress !== null;
+  }
+
+  get isDestroying(): boolean {
+    return this.destroyProgress === 'progress';
+  }
+
+  get isDestroyFinished(): boolean {
+    return this.destroyProgress === 'finished';
+  }
 
   copySecretUrl(url: string): void {
       const el = document.createElement('textarea');
@@ -34,6 +58,14 @@ export class SecretCreatedComponent implements OnInit {
 
   enableCopy(): void {
     this.copied = false;
+  }
+
+  destroySecret(): void {
+    this.destroyProgress = 'progress';
+    this.secretService.destroySecret(this.secret).subscribe((success) => {
+      this.destroyProgress = 'finished';
+      this.destroyed = success;
+    });
   }
 
   ngOnInit(): void {

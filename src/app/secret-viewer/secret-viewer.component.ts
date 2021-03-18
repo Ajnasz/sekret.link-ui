@@ -6,6 +6,7 @@ import { Secret } from '../secret';
 import { SecretService } from '../secret.service';
 import { EncoderService } from '../encoder.service';
 import { TitleService } from '../title.service';
+import { ReadmanagerService } from '../readmanager.service';
 
 import {
   HttpErrorResponse,
@@ -42,6 +43,7 @@ export class SecretViewerComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         private titleService: TitleService,
+        private readManager: ReadmanagerService,
     ) { }
 
     readSecret(): void {
@@ -63,10 +65,15 @@ export class SecretViewerComponent implements OnInit {
           this.clientError = new Error('Invalid key');
           return;
         }
+        if (this.readManager.isRead(id)) {
+          this.clientError = new Error('Secret already read');
+          return;
+        }
 
         this.secretKey = serverKey;
         this.clientKey = clientKey || '';
         this.secretID = id;
         this.location.replaceState('/hidden');
+
     }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Secret } from './secret';
@@ -70,5 +70,16 @@ export class SecretService {
         tap(_ => console.log('secret created')),
         catchError(this.handleError<Secret>('saveSecret'))
       );
+  }
+
+  destroySecret(secret: Secret): Observable<boolean> {
+    const url = new URL(this.secretsURL.href);
+    url.pathname += `/${secret.UUID}/${secret.Key}/${secret.DeleteKey}`;
+    console.log('destroy', url.href);
+
+    return this.http.delete(url.href, this.httpOptions).pipe(
+      () => of(true),
+      catchError(() => of(false))
+    );
   }
 }

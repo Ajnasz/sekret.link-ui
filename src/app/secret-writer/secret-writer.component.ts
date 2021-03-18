@@ -6,6 +6,7 @@ import { SecretService } from '../secret.service';
 import { EncoderService } from '../encoder.service';
 import { TitleService } from '../title.service';
 import { SecretMemoryStoreService } from '../secret-memory-store.service';
+import { ReadmanagerService } from '../readmanager.service';
 
 const ONE_HOUR = '1h';
 const ONE_DAY = '24h';
@@ -45,6 +46,7 @@ export class SecretWriterComponent implements OnInit {
       private router: Router,
       private titleService: TitleService,
       private memoryStore: SecretMemoryStoreService,
+      private readManager: ReadmanagerService,
     ) { }
 
     validateSecret(): boolean {
@@ -69,6 +71,7 @@ export class SecretWriterComponent implements OnInit {
         this.secretService.saveSecret(encoded, this.selectedExpiration, this.maxReads).subscribe((secret: Secret) => {
 
           this.memoryStore.store(secret, password);
+          this.readManager.setRead(secret.UUID);
           this.router.navigate(['/created']);
         }, (error) => {
           let msg = error.statusText;
@@ -92,8 +95,10 @@ export class SecretWriterComponent implements OnInit {
     ngOnInit(): void {
       this.titleService.setTitle('Share a secret');
       this.secret = {
+        UUID: '',
         Data: '',
         Created: null,
+        DeleteKey: '',
       };
     }
 }

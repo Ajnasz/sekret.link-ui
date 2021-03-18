@@ -24,13 +24,14 @@
 https://sekret.link/api/c80f11af-e3c3-4c46-b3f6-8b1a8ed70fe7/1e73fa83cf2584fb37ef5f95cbfb31119f743a313175e92187ef7e70b7df3273
 </code></pre>
 		</dd>
+
 		<dt class="title is-5">Create a secret note with custom expiration</dt>
 		<dd>
 		<p>
 			To set a custom expiration date you must use the <code>expire</code> query parameter.
 			The expiration  string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
 		</p>
-		<pre><code>$ curl -d 'Secret data' https://secret.link/api?24h10m5s</code></pre>
+		<pre><code>$ curl -d 'Secret data' https://secret.link/api?expire=24h10m5s</code></pre>
 
 		<p>If the expiratoin date is more than the maximum enabled or it's an invalid expiration string an Invalid expiration date error will be returned.</p>
 		<pre><code>
@@ -42,6 +43,16 @@ https://sekret.link/api/c80f11af-e3c3-4c46-b3f6-8b1a8ed70fe7/1e73fa83cf2584fb37e
 Invalid expiration date
 </code></pre>
 		</dd>
+
+		<dt class="title is-5">Allow to read the secret multiple times</dt>
+		<dd>
+		<p>
+			You can make a secret readable multiple times by setting the <code>maxReads</code> query parameter to a number which is greater than 0.
+		</p>
+		<pre><code>$ curl -d 'Secret data' https://secret.link/api?maxReads=5</code></pre>
+		<p>If the <code>maxReads</code> is less then 1 or the value is not a number, an Invalid maxRead error will be returned</p>
+		</dd>
+
 		<dt class="title is-5">Read a secret note</dt>
 		<dd>
 		<p>
