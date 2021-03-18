@@ -88,8 +88,8 @@ export class SecretWriterComponent implements OnInit {
       this.selectedExpiration = value;
     }
 
-    changeShareWithTeam(): void {
-      this.maxReads += 1;
+    changeShareWithTeam(count: number): void {
+      this.maxReads = count;
     }
 
     ngOnInit(): void {

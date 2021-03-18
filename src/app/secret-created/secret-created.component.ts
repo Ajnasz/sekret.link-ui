@@ -17,7 +17,7 @@ export class SecretCreatedComponent implements OnInit {
   decryptData: string;
   errorMessage = '';
   copied = false;
-  private destroyProgress: 'progress' | 'finished' | null = null;
+  private destroyProgress: 'init' | 'progress' | 'finished' | null = null;
   destroyed = false;
 
   constructor(
@@ -25,6 +25,10 @@ export class SecretCreatedComponent implements OnInit {
     private memoryStore: SecretMemoryStoreService,
     private titleService: TitleService,
   ) {}
+
+  get showDestroyConfirm(): boolean {
+    return this.destroyProgress === 'init';
+  }
 
   get canDestroySecret(): boolean {
     return this.secret.DeleteKey !== '' && this.secret.UUID !== '' && this.secret.Key !== '';
@@ -35,7 +39,7 @@ export class SecretCreatedComponent implements OnInit {
   }
 
   get showDestroyMessage(): boolean {
-    return this.destroyProgress !== null;
+    return this.destroyProgress === 'progress' || this.destroyProgress === 'finished';
   }
 
   get isDestroying(): boolean {
@@ -58,6 +62,11 @@ export class SecretCreatedComponent implements OnInit {
 
   enableCopy(): void {
     this.copied = false;
+  }
+
+
+  initDestroySecret(): void {
+    this.destroyProgress = 'init';
   }
 
   destroySecret(): void {
