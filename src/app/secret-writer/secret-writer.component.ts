@@ -92,6 +92,15 @@ export class SecretWriterComponent implements OnInit {
       this.maxReads = count;
     }
 
+    toggleShareWithGroup(): void {
+      if (this.shareWithTeam) {
+        this.maxReads = 1;
+        return;
+      }
+
+      this.maxReads = 2;
+    }
+
     ngOnInit(): void {
       this.titleService.setTitle('Share a secret');
       this.secret = {
