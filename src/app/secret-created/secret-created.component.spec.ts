@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SecretCreatedComponent } from './secret-created.component';
 
@@ -6,7 +6,7 @@ describe('SecretCreatedComponent', () => {
   let component: SecretCreatedComponent;
   let fixture: ComponentFixture<SecretCreatedComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SecretCreatedComponent ]
     })
