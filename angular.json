@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "note-ui": {
+    "sekret-link-ui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/note-ui",
+            "outputPath": "dist/sekret-link-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "note-ui:build"
+            "browserTarget": "sekret-link-ui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "note-ui:build:production"
+              "browserTarget": "sekret-link-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "note-ui:build"
+            "browserTarget": "sekret-link-ui:build"
           }
         },
         "test": {
@@ -106,16 +106,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "note-ui:serve"
+            "devServerTarget": "sekret-link-ui:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "note-ui:serve:production"
+              "devServerTarget": "sekret-link-ui:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "note-ui"
+  "defaultProject": "sekret-link-ui"
 }

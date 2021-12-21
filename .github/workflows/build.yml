@@ -32,7 +32,7 @@ jobs:
           npm i
           npm run css-build
           npm run build:prod
-          cd dist/note-ui
+          cd dist/sekret-link-ui
           tar czf ../sekret.link-ui.tgz .
 
       - name: create release
