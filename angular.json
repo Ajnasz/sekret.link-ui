@@ -34,7 +34,7 @@
             "optimization": false,
             "namedChunks": true,
             "allowedCommonJsDependencies": [
-              "crypto-js", "stream"
+              "crypto-js"
             ]
           },
           "configurations": {
