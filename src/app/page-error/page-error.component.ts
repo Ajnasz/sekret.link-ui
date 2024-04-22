@@ -19,6 +19,9 @@ export class PageErrorComponent implements OnInit {
         case 401:
           this.errorMessage = 'Unauthorized';
           break;
+        case 410:
+          this.errorMessage = 'Secret has been deleted';
+          break;
         default:
           this.errorMessage = 'Unknown error';
       }
