@@ -71,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sekret-link-ui:build"
+            "buildTarget": "sekret-link-ui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sekret-link-ui:build:production"
+              "buildTarget": "sekret-link-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sekret-link-ui:build"
+            "buildTarget": "sekret-link-ui:build"
           }
         },
         "test": {
