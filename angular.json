@@ -24,7 +24,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/bulma.css",
+              "src/assets/bulma.css"
             ],
             "scripts": [],
             "vendorChunk": true,
