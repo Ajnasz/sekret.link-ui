@@ -56,7 +56,7 @@ Invalid expiration date
 		<dt class="title is-5">Read a secret note</dt>
 		<dd>
 		<p>
-		To read a secret note you'll need to add the <code>X-ENTRY-UUID</code> and the <code>X-ENTRY-KEY</code> to the API path. (https://sekret.link/api/&lt;uuid&gt;/&lt;key&gt;)<br>
+			To read a secret note you'll need to add the <code>X-ENTRY-UUID</code> and the <code>X-ENTRY-KEY</code> to the API path. (<code>https://sekret.link/api/&lt;uuid&gt;/&lt;key&gt;</code>)<br>
 		When the key and UUID are the following:
 		</p>
 		<pre><code>
@@ -65,9 +65,16 @@ Invalid expiration date
 </code></pre>
 
 		<p>The link to the secret will be the following:</p>
-		<pre><code>
-https://sekret.link/api/c80f11af-e3c3-4c46-b3f6-8b1a8ed70fe7/1e73fa83cf2584fb37ef5f95cbfb31119f743a313175e92187ef7e70b7df3273
-</code></pre>
+		<pre><code>https://sekret.link/api/c80f11af-e3c3-4c46-b3f6-8b1a8ed70fe7/1e73fa83cf2584fb37ef5f95cbfb31119f743a313175e92187ef7e70b7df3273</code></pre>
+		</dd>
+		<dt class="title is-5">Setting content type</dt>
+		<dd>
+			<p>
+				You can specify the content type of the secret by using the <code>Content-Type</code> header.
+				The header is optional and the default content type is <code>application/octet-stream</code>.
+				The content type will be stored and returned when reading the secret in the <code>content-type</code> header.
+			</p>
+			<pre><code>$ curl -H "Content-Type: text/html" --data-binary '&lt;h1&gt;hello world&lt;/h1&gt;' https://sekret.link/api/</code></pre>
 		</dd>
 	</dl>
 </article>
