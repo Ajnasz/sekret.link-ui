@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  HttpRequest,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpRequest, HttpHeaders } from '@angular/common/http';
 import {
   InMemoryDbService,
   RequestInfo,

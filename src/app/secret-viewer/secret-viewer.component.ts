@@ -8,9 +8,7 @@ import { EncoderService } from '../encoder.service';
 import { TitleService } from '../title.service';
 import { ReadmanagerService } from '../readmanager.service';
 
-import {
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-secret-viewer',
