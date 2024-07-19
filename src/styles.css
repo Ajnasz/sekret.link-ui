@@ -1,1 +1,104 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .notification {
+    --tw-bg-color: var(--color-sekret-100);
+    --tw-text-color: var(--color-sekret-800);
+    @apply rounded p-4 mb-4 bg-sekret-100 text-sekret-800 border border-solid border-sekret-300;
+  }
+
+  .notification.is-danger {
+    --tw-bg-color: var(--color-rose-100);
+    --tw-text-color: var(--color-rose-800);
+    @apply bg-rose-100 text-rose-800 border-rose-300;
+  }
+
+  .notification.is-success {
+    --tw-bg-color: var(--color-green-100);
+    --tw-text-color: var(--color-green-800);
+    @apply bg-green-100 text-green-800 border-green-300;
+  }
+
+  .title {
+    @apply font-bold;
+  }
+
+  .title.is-2 {
+    @apply text-2xl mb-6;
+  }
+
+  .title.is-3 {
+    @apply text-xl mb-4;
+  }
+
+  .title.is-4 {
+    @apply text-lg mb-2;
+  }
+
+  .title.is-5 {
+    @apply text-lg mb-2;
+  }
+
+  p {
+    @apply mb-4;
+  }
+
+  dd {
+    @apply mb-4 ml-5;
+  }
+
+  pre {
+    @apply bg-gray-100 rounded p-1 my-4 overflow-auto;
+  }
+
+  .button {
+    @apply rounded px-4 py-2 transition-colors ring-0 focus:ring-2 focus-visible:ring-2 focus:outline-none outline-none;
+  }
+
+  .button.primary {
+    @apply bg-sekret-600 hover:bg-sekret-800 text-white focus:ring-sekret-400 focus-visible:ring-sekret-400;
+  }
+
+  .button.danger {
+    @apply bg-rose-600 hover:bg-rose-800 text-white focus:ring-red-400 focus-visible:ring-red-400;
+  }
+
+  .button.secondary {
+    @apply bg-white text-sekret-600 hover:bg-sekret-600 hover:text-white ring-sekret-600 focus:ring-sekret-400 focus-visible:ring-sekret-400;
+  }
+
+  a {
+    @apply text-sekret-600 hover:text-sekret-800 focus:ring-sekret-400 focus-visible:ring-sekret-400;
+  }
+
+  input, textarea, select {
+    @apply accent-sekret-600 bg-white focus-visible:ring-2 focus-visible:ring-sekret-600 focus:outline-none focus:ring-2 focus:ring-sekret-600 invalid:ring-2 invalid:ring-sekret-200 ring-2 ring-sekret-200 rounded shadow-sm;
+  }
+
+  select:not([size]) {
+    @apply pl-3 pr-8 py-2 border bg-no-repeat appearance-none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'%3E%3Cpath stroke='%2398337b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.75rem center;
+    background-size: 0.75em 0.75em;
+  }
+
+  input,
+  textarea {
+    @apply block p-2;
+  }
+
+  input[type="checkbox"] {
+    @apply inline-block appearance-none;
+    width: 1.25em;
+    height: 1.25em;
+    line-height: 1.25em;
+  }
+
+  input[type="checkbox"]:checked {
+    @apply bg-sekret-600 text-white bg-no-repeat bg-center bg-contain;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 12'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M1 5.917 5.724 10.5 15 1.5'/%3E%3C/svg%3E");
+    background-size: 0.7em 0.7em;
+  }
+}

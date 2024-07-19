@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { Secret } from '../secret';
 import { SecretService } from '../secret.service';
@@ -10,13 +10,16 @@ import { TitleService } from '../title.service';
   templateUrl: './secret-created.component.html',
   styleUrls: ['./secret-created.component.css']
 })
-export class SecretCreatedComponent implements OnInit {
+export class SecretCreatedComponent implements OnInit, AfterViewInit {
+  @ViewChild('newURLInput') newURLInput: ElementRef;
+
   newURL: URL;
   secret: Secret;
   password: string;
   decryptData: string;
   errorMessage = '';
-  copied = false;
+  copied: boolean = false;
+  animate: boolean = false;
   private destroyProgress: 'init' | 'progress' | 'finished' | null = null;
   destroyed = false;
 
@@ -50,14 +53,11 @@ export class SecretCreatedComponent implements OnInit {
     return this.destroyProgress === 'finished';
   }
 
-  copySecretUrl(url: string): void {
-      const el = document.createElement('textarea');
-      el.value = url;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      this.copied = true;
+  async copySecretUrl(url: string): Promise<void> {
+    this.animate = false;
+    await navigator.clipboard.writeText(url);
+    this.copied = true;
+    this.animate = true;
   }
 
   enableCopy(): void {
@@ -92,5 +92,12 @@ export class SecretCreatedComponent implements OnInit {
     }
     this.errorMessage = 'Secret not found';
     this.titleService.setTitle('Secret not found');
+  }
+
+  ngAfterViewInit() {
+    if (this.newURLInput) {
+      this.newURLInput.nativeElement.focus();
+      this.newURLInput.nativeElement.select();
+    }
   }
 }

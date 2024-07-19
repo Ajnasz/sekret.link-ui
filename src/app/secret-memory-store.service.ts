@@ -22,7 +22,7 @@ export class SecretMemoryStoreService {
   }
 
   get(): {secret: Secret, password: string} {
-    const secret = this.secret;
+    const secret: Secret = this.secret;
     const password = this.password;
     this.resetSecret();
     return { secret, password };

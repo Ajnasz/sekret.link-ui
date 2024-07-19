@@ -1,8 +1,3 @@
-.app-content {
-	margin-left: 20%;
-	width: 60%;
-}
-
 @media print,screen and (max-width: 1408px) {
 	.app-content {
 		margin-left: 15%;

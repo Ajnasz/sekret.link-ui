@@ -41,17 +41,9 @@ export class InMemoryDataService implements InMemoryDbService {
     return { secret };
   }
 
-/*   parseRequestUrl(url: string): ParsedRequestUrl { */
-/*     console.log(this); */
-/*     return { */
-/*     } */
-/*   } */
-
   private getRequestData(reqInfo: RequestInfo): SecretRequestData {
-    console.log(this);
     const plainURL = reqInfo.url.replace(reqInfo.apiBase, '');
     const parts = plainURL.split('/');
-    console.log('parts', reqInfo.url, parts);
     const out: SecretRequestData = {
       collectionName: parts[0],
       action: parts[1] as SecretActions,
@@ -128,7 +120,6 @@ export class InMemoryDataService implements InMemoryDbService {
     const data = this.getJSONBody(req as HttpRequest<any>);
     data.Created = new Date();
     data.UUID = this.genId();
-    console.log('erequinfo', reqInfo);
     data.Key =  (Math.round(Math.random() * 1e16)).toString(16) +  (Math.round(Math.random() * 1e16)).toString(16);
     /* data.Id = this.genId(); */
     reqInfo.collection.push(data);
@@ -140,7 +131,6 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   genId(): string {
-    console.log('gen id');
     return uuidv4();
   }
 }
