@@ -54,7 +54,7 @@
   }
 
   .button {
-    @apply rounded px-4 py-2 transition-colors ring-0 focus:ring-2 focus-visible:ring-2 focus:outline-none outline-none;
+    @apply rounded px-4 py-2 transition-colors ring-0 focus:ring-2 focus-visible:ring-2 focus:outline-none outline-none block w-full sm:inline-block sm:w-auto mb-4 sm:mb-0 text-center;
   }
 
   .button.primary {
@@ -78,7 +78,7 @@
   }
 
   select:not([size]) {
-    @apply pl-3 pr-8 py-2 border bg-no-repeat appearance-none;
+    @apply pl-3 pr-8 py-2 border bg-no-repeat appearance-none block w-full sm:w-auto;
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'%3E%3Cpath stroke='%2398337b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3E%3C/svg%3E");
     background-position: right 0.75rem center;
     background-size: 0.75em 0.75em;
