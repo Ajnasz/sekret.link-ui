@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?w0y7g4');
-  src:  url('fonts/icomoon.eot?w0y7g4#iefix') format('embedded-opentype'),
+  src: url('fonts/icomoon.eot?w0y7g4');
+  src:
+    url('fonts/icomoon.eot?w0y7g4#iefix') format('embedded-opentype'),
     url('fonts/icomoon.ttf?w0y7g4') format('truetype'),
     url('fonts/icomoon.woff?w0y7g4') format('woff'),
     url('fonts/icomoon.svg?w0y7g4#icomoon') format('svg');
@@ -10,7 +11,8 @@
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^='icon-'],
+[class*=' icon-'] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: never;
@@ -26,8 +28,8 @@
 }
 
 .icon-copy:before {
-  content: "\e92c";
+  content: '\e92c';
 }
 .icon-github:before {
-  content: "\eab0";
+  content: '\eab0';
 }

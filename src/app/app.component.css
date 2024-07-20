@@ -1,38 +1,38 @@
-@media print,screen and (max-width: 1408px) {
-	.app-content {
-		margin-left: 15%;
-		width: 70%;
-	}
+@media print, screen and (max-width: 1408px) {
+  .app-content {
+    margin-left: 15%;
+    width: 70%;
+  }
 }
 
-@media print,screen and (max-width: 1216px) {
-	.app-content {
-		margin-left: 15%;
-		width: 70%;
-	}
+@media print, screen and (max-width: 1216px) {
+  .app-content {
+    margin-left: 15%;
+    width: 70%;
+  }
 }
 
-@media print,screen and (max-width: 769px) {
-	.app-content {
-		margin-left: 10%;
-		width: 80%;
-	}
+@media print, screen and (max-width: 769px) {
+  .app-content {
+    margin-left: 10%;
+    width: 80%;
+  }
 }
-@media print,screen and (max-width: 514px) {
-	.app-content {
-		margin-left: 0;
-		width: 100%;
-	}
+@media print, screen and (max-width: 514px) {
+  .app-content {
+    margin-left: 0;
+    width: 100%;
+  }
 }
 
 .header-main {
-	padding: 1rem 3rem;
+  padding: 1rem 3rem;
 }
 
 .bd-main {
-	padding: 1rem 3rem;
+  padding: 1rem 3rem;
 }
 
 .footer {
-	padding: 1rem 3rem;
+  padding: 1rem 3rem;
 }

@@ -73,7 +73,9 @@
     @apply text-sekret-600 hover:text-sekret-800 focus:ring-sekret-400 focus-visible:ring-sekret-400;
   }
 
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     @apply accent-sekret-600 bg-white focus-visible:ring-2 focus-visible:ring-sekret-600 focus:outline-none focus:ring-2 focus:ring-sekret-600 invalid:ring-2 invalid:ring-sekret-200 ring-2 ring-sekret-200 rounded shadow-sm;
   }
 
@@ -89,14 +91,14 @@
     @apply block p-2;
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     @apply inline-block appearance-none;
     width: 1.25em;
     height: 1.25em;
     line-height: 1.25em;
   }
 
-  input[type="checkbox"]:checked {
+  input[type='checkbox']:checked {
     @apply bg-sekret-600 text-white bg-no-repeat bg-center bg-contain;
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 12'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M1 5.917 5.724 10.5 15 1.5'/%3E%3C/svg%3E");
     background-size: 0.7em 0.7em;
