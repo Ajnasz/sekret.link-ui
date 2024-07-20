@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 import { Secret } from '../secret';
 import { SecretService } from '../secret.service';
@@ -8,7 +14,7 @@ import { TitleService } from '../title.service';
 @Component({
   selector: 'app-secret-created',
   templateUrl: './secret-created.component.html',
-  styleUrls: ['./secret-created.component.css']
+  styleUrls: ['./secret-created.component.css'],
 })
 export class SecretCreatedComponent implements OnInit, AfterViewInit {
   @ViewChild('newURLInput') newURLInput: ElementRef;
@@ -18,15 +24,15 @@ export class SecretCreatedComponent implements OnInit, AfterViewInit {
   password: string;
   decryptData: string;
   errorMessage = '';
-  copied: boolean = false;
-  animate: boolean = false;
+  copied = false;
+  animate = false;
   private destroyProgress: 'init' | 'progress' | 'finished' | null = null;
   destroyed = false;
 
   constructor(
     private secretService: SecretService,
     private memoryStore: SecretMemoryStoreService,
-    private titleService: TitleService,
+    private titleService: TitleService
   ) {}
 
   get showDestroyConfirm(): boolean {
@@ -34,7 +40,11 @@ export class SecretCreatedComponent implements OnInit, AfterViewInit {
   }
 
   get canDestroySecret(): boolean {
-    return this.secret.DeleteKey !== '' && this.secret.UUID !== '' && this.secret.Key !== '';
+    return (
+      this.secret.DeleteKey !== '' &&
+      this.secret.UUID !== '' &&
+      this.secret.Key !== ''
+    );
   }
 
   get showCreatedMessage(): boolean {
@@ -42,7 +52,9 @@ export class SecretCreatedComponent implements OnInit, AfterViewInit {
   }
 
   get showDestroyMessage(): boolean {
-    return this.destroyProgress === 'progress' || this.destroyProgress === 'finished';
+    return (
+      this.destroyProgress === 'progress' || this.destroyProgress === 'finished'
+    );
   }
 
   get isDestroying(): boolean {
@@ -64,14 +76,13 @@ export class SecretCreatedComponent implements OnInit, AfterViewInit {
     this.copied = false;
   }
 
-
   initDestroySecret(): void {
     this.destroyProgress = 'init';
   }
 
   destroySecret(): void {
     this.destroyProgress = 'progress';
-    this.secretService.destroySecret(this.secret).subscribe((success) => {
+    this.secretService.destroySecret(this.secret).subscribe(success => {
       this.destroyProgress = 'finished';
       this.destroyed = success;
     });
@@ -85,7 +96,10 @@ export class SecretCreatedComponent implements OnInit, AfterViewInit {
       if (secret && secret.UUID && secret.Key && password) {
         this.secret = secret;
         this.decryptData = `${secret.Key}&${password}`;
-        this.newURL = new URL(`/view/${secret.UUID}#${secret.Key}&${password}`, window.location.toString());
+        this.newURL = new URL(
+          `/view/${secret.UUID}#${secret.Key}&${password}`,
+          window.location.toString()
+        );
         this.titleService.setTitle('Secret created');
         return;
       }

@@ -8,9 +8,8 @@ describe('PageLogoComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageLogoComponent ]
-    })
-    .compileComponents();
+      declarations: [PageLogoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

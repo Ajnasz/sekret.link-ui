@@ -1,13 +1,15 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Share a secret - Sekret Link</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#801176">
-    <meta name="description" content="Share sensitive information securely via a link that is available only one time. Useful to keep secrets out of chat logs or emails.">
-    <link rel="icon" type="image/png" href="/assets/icon.png">
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#801176" />
+    <meta
+      name="description"
+      content="Share sensitive information securely via a link that is available only one time. Useful to keep secrets out of chat logs or emails." />
+    <link rel="icon" type="image/png" href="/assets/icon.png" />
   </head>
   <body class="bg-stone-200">
     <app-root></app-root>
@@ -18,16 +20,41 @@
           <div class="mb-4">
             <label class="block font-bold mb-2" for="secret">Secret</label>
             <div class="control">
-              <textarea class="textarea w-full" name="secret" id="secret" rows="5" cols="50" placeholder="Secret message or password"></textarea>
+              <textarea
+                class="textarea w-full"
+                name="secret"
+                id="secret"
+                rows="5"
+                cols="50"
+                placeholder="Secret message or password"></textarea>
             </div>
           </div>
           <div class="buttons mb-4">
             <button class="button primary" type="submit">Create secret</button>
           </div>
-          <p class="text-sm">Enter the message or password you want to share securely. After you submit the message by pressing the "Create secret" button, you will receive a link. Send this link to your messaging partner so they can read the secret message.</p>
           <p class="text-sm">
-            <strong>Attention!</strong> The message can be read only once! After it's read, the message will be destroyed and cannot be restored.<br>
-            Also note that <strong>if you send the link through an application which provides a preview of websites, it may</strong> try to download and create a preview for this link as well by fetching the URL. This means that this third-party tool will <strong>read and destroy the secret</strong>. To prevent this, it's suggested to <strong>use the JavaScript-enabled version of the application</strong> which can address this issue with some additional mechanisms.</p>
+            Enter the message or password you want to share securely. After you
+            submit the message by pressing the "Create secret" button, you will
+            receive a link. Send this link to your messaging partner so they can
+            read the secret message.
+          </p>
+          <p class="text-sm">
+            <strong>Attention!</strong> The message can be read only once! After
+            it's read, the message will be destroyed and cannot be restored.<br />
+            Also note that
+            <strong
+              >if you send the link through an application which provides a
+              preview of websites, it may</strong
+            >
+            try to download and create a preview for this link as well by
+            fetching the URL. This means that this third-party tool will
+            <strong>read and destroy the secret</strong>. To prevent this, it's
+            suggested to
+            <strong
+              >use the JavaScript-enabled version of the application</strong
+            >
+            which can address this issue with some additional mechanisms.
+          </p>
         </form>
       </section>
     </noscript>

@@ -1,15 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-icomoon-icon',
   templateUrl: './icomoon-icon.component.html',
-  styleUrls: ['./icomoon-icon.component.css']
+  styleUrls: ['./icomoon-icon.component.css'],
 })
-export class IcomoonIconComponent implements OnInit {
+export class IcomoonIconComponent {
   @Input() name: string;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 }

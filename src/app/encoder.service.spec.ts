@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import * as CryptoJS from 'crypto-js';
 
 import { EncoderService } from './encoder.service';
 

@@ -8,9 +8,8 @@ describe('ApiDocumentationComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApiDocumentationComponent ]
-    })
-    .compileComponents();
+      declarations: [ApiDocumentationComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
