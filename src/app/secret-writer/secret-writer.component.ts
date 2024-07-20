@@ -22,58 +22,61 @@ interface ExpireDurationValue {
 @Component({
   selector: 'app-secret-writer',
   templateUrl: './secret-writer.component.html',
-  styleUrls: ['./secret-writer.component.css']
+  styleUrls: ['./secret-writer.component.css'],
 })
 export class SecretWriterComponent implements OnInit {
-    errorMessage = '';
-    secret: Secret = null;
-    expirations: ExpireDurationValue[] = [
-      {text: '1 Hour', value: ONE_HOUR},
-      {text: '1 Day', value: ONE_DAY},
-      {text: '1 Week', value: ONE_WEEK},
-      {text: '30 Days', value: THIRTY_DAYS},
-    ];
-    selectedExpiration: EXPIRE_DURATIONS = '24h';
-    maxReads = 1;
+  errorMessage = '';
+  secret: Secret = null;
+  expirations: ExpireDurationValue[] = [
+    { text: '1 Hour', value: ONE_HOUR },
+    { text: '1 Day', value: ONE_DAY },
+    { text: '1 Week', value: ONE_WEEK },
+    { text: '30 Days', value: THIRTY_DAYS },
+  ];
+  selectedExpiration: EXPIRE_DURATIONS = '24h';
+  maxReads = 1;
 
-    get shareWithTeam(): boolean {
-      return this.maxReads > 1;
+  get shareWithTeam(): boolean {
+    return this.maxReads > 1;
+  }
+
+  constructor(
+    private secretService: SecretService,
+    private encoderService: EncoderService,
+    private router: Router,
+    private titleService: TitleService,
+    private memoryStore: SecretMemoryStoreService,
+    private readManager: ReadmanagerService
+  ) {}
+
+  validateSecret(): boolean {
+    if (this.secret.Data === '') {
+      this.errorMessage = 'Secret must not be empty';
+      return false;
     }
 
-    constructor(
-      private secretService: SecretService,
-      private encoderService: EncoderService,
-      private router: Router,
-      private titleService: TitleService,
-      private memoryStore: SecretMemoryStoreService,
-      private readManager: ReadmanagerService,
-    ) { }
+    this.errorMessage = '';
 
-    validateSecret(): boolean {
-      if (this.secret.Data === '') {
-        this.errorMessage = 'Secret must not be empty';
-        return false;
-      }
+    return true;
+  }
 
-      this.errorMessage = '';
-
-      return true;
+  onSubmit(): void {
+    if (!this.validateSecret()) {
+      return;
     }
 
-    onSubmit(): void {
-        if (!this.validateSecret()) {
-          return;
-        }
+    const password = this.encoderService.generatePassword();
+    const encoded = this.encoderService.encryptData(this.secret.Data, password);
 
-        const password = this.encoderService.generatePassword();
-        const encoded = this.encoderService.encryptData(this.secret.Data, password);
-
-        this.secretService.saveSecret(encoded, this.selectedExpiration, this.maxReads).subscribe((secret: Secret) => {
-
+    this.secretService
+      .saveSecret(encoded, this.selectedExpiration, this.maxReads)
+      .subscribe(
+        (secret: Secret) => {
           this.memoryStore.store(secret, password);
           this.readManager.setRead(secret.UUID);
           this.router.navigate(['/created']);
-        }, (error) => {
+        },
+        error => {
           let msg = error.statusText;
 
           if (typeof error.error === 'string') {
@@ -81,33 +84,34 @@ export class SecretWriterComponent implements OnInit {
           }
 
           this.errorMessage = msg;
-        });
+        }
+      );
+  }
+
+  updateSelectedExpiration(value: EXPIRE_DURATIONS): void {
+    this.selectedExpiration = value;
+  }
+
+  changeShareWithTeam(count: number): void {
+    this.maxReads = count;
+  }
+
+  toggleShareWithGroup(): void {
+    if (this.shareWithTeam) {
+      this.maxReads = 1;
+      return;
     }
 
-    updateSelectedExpiration(value: EXPIRE_DURATIONS): void {
-      this.selectedExpiration = value;
-    }
+    this.maxReads = 2;
+  }
 
-    changeShareWithTeam(count: number): void {
-      this.maxReads = count;
-    }
-
-    toggleShareWithGroup(): void {
-      if (this.shareWithTeam) {
-        this.maxReads = 1;
-        return;
-      }
-
-      this.maxReads = 2;
-    }
-
-    ngOnInit(): void {
-      this.titleService.setTitle('Share a secret');
-      this.secret = {
-        UUID: '',
-        Data: '',
-        Created: null,
-        DeleteKey: '',
-      };
-    }
+  ngOnInit(): void {
+    this.titleService.setTitle('Share a secret');
+    this.secret = {
+      UUID: '',
+      Data: '',
+      Created: null,
+      DeleteKey: '',
+    };
+  }
 }

@@ -4,12 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ApiDocumentationRoutingModule } from './api-documentation-routing.module';
 import { ApiDocumentationComponent } from './api-documentation.component';
 
-
 @NgModule({
   declarations: [ApiDocumentationComponent],
-  imports: [
-    CommonModule,
-    ApiDocumentationRoutingModule
-  ]
+  imports: [CommonModule, ApiDocumentationRoutingModule],
 })
-export class ApiDocumentationModule { }
+export class ApiDocumentationModule {}

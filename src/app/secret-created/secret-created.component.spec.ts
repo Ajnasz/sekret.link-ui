@@ -8,9 +8,8 @@ describe('SecretCreatedComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SecretCreatedComponent ]
-    })
-    .compileComponents();
+      declarations: [SecretCreatedComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

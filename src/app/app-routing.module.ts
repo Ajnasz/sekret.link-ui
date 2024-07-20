@@ -7,19 +7,29 @@ import { SecretCreatedComponent } from './secret-created/secret-created.componen
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/create', pathMatch: 'full' },
-    { path: 'create', component: SecretWriterComponent },
-    { path: 'created', component: SecretCreatedComponent },
-    { path: 'view/:id', component: SecretViewerComponent },
-    { path: '404', component: NotFoundComponent },
-    { path: 'hidden', redirectTo: '/create', pathMatch: 'full' },
-    { path: 'api-doc', loadChildren: () => import('./api-documentation/api-documentation.module').then(m => m.ApiDocumentationModule) },
-    { path: 'privacy', loadChildren: () => import('./privacy/privacy.module').then(m => m.PrivacyModule) },
-    { path: '**', redirectTo: '/404' }
+  { path: '', redirectTo: '/create', pathMatch: 'full' },
+  { path: 'create', component: SecretWriterComponent },
+  { path: 'created', component: SecretCreatedComponent },
+  { path: 'view/:id', component: SecretViewerComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: 'hidden', redirectTo: '/create', pathMatch: 'full' },
+  {
+    path: 'api-doc',
+    loadChildren: () =>
+      import('./api-documentation/api-documentation.module').then(
+        m => m.ApiDocumentationModule
+      ),
+  },
+  {
+    path: 'privacy',
+    loadChildren: () =>
+      import('./privacy/privacy.module').then(m => m.PrivacyModule),
+  },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {})],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

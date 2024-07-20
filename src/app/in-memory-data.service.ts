@@ -13,28 +13,27 @@ import {
 import { Secret } from './secret';
 
 function uuidv4(): string {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-       const r = Math.random() * 16 | 0;
-    const v = c === 'x' ? r : (r & 0x3 | 0x8);
-       return v.toString(16);
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
   });
 }
 
 type SecretActions = 'has' | 'read';
 
 interface SecretRequestData {
-    collectionName: string;
-    action: SecretActions;
-    id: string;
-    params: string[];
+  collectionName: string;
+  action: SecretActions;
+  id: string;
+  params: string[];
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InMemoryDataService implements InMemoryDbService {
-  createDb(): {secret: Secret[]} {
+  createDb(): { secret: Secret[] } {
     const secret = JSON.parse(window.localStorage.getItem('secret')) || [];
     return { secret };
   }
@@ -51,13 +50,24 @@ export class InMemoryDataService implements InMemoryDbService {
     return out;
   }
 
-  private getData(requestData: SecretRequestData, reqInfo: RequestInfo): Secret {
-
+  private getData(
+    requestData: SecretRequestData,
+    reqInfo: RequestInfo
+  ): Secret {
     if (requestData.collectionName === 'secret') {
-      const item = reqInfo.collection.find((s: Secret) => s.UUID === requestData.id);
+      const item = reqInfo.collection.find(
+        (s: Secret) => s.UUID === requestData.id
+      );
 
-      if (item && requestData.action === 'read' && requestData.params[0] === item.Key) {
-        window.localStorage.setItem('secret', JSON.stringify(reqInfo.collection.filter((s: Secret) => s !== item)));
+      if (
+        item &&
+        requestData.action === 'read' &&
+        requestData.params[0] === item.Key
+      ) {
+        window.localStorage.setItem(
+          'secret',
+          JSON.stringify(reqInfo.collection.filter((s: Secret) => s !== item))
+        );
       }
       return item;
     }
@@ -83,7 +93,7 @@ export class InMemoryDataService implements InMemoryDbService {
             ID: data.UUID,
             Data: null,
             Created: data.Created,
-          }
+          },
         };
       } else {
         if (data.Key === requestData.params[0]) {
@@ -113,7 +123,9 @@ export class InMemoryDataService implements InMemoryDbService {
     return req.body;
   }
 
-  private isSecretRequest(reqInfo: RequestCore): reqInfo is HttpRequest<Secret> {
+  private isSecretRequest(
+    reqInfo: RequestCore
+  ): reqInfo is HttpRequest<Secret> {
     return reqInfo.url.includes('secret');
   }
 
@@ -126,12 +138,14 @@ export class InMemoryDataService implements InMemoryDbService {
     const data = this.getJSONBody(req);
     data.Created = new Date();
     data.UUID = this.genId();
-    data.Key =  (Math.round(Math.random() * 1e16)).toString(16) +  (Math.round(Math.random() * 1e16)).toString(16);
+    data.Key =
+      Math.round(Math.random() * 1e16).toString(16) +
+      Math.round(Math.random() * 1e16).toString(16);
     /* data.Id = this.genId(); */
     reqInfo.collection.push(data);
     window.localStorage.setItem('secret', JSON.stringify(reqInfo.collection));
     /* const body = "OK"; */
-    const headers =  new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const response = { body: data, status: STATUS.CREATED, headers };
     return reqInfo.utils.createResponse$(() => response);
   }

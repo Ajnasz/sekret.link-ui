@@ -14,7 +14,6 @@ const KEY_PREFIX = 'secret:read:';
   providedIn: 'root',
 })
 export class ReadmanagerService {
-
   constructor() {
     this.maintain();
   }
@@ -24,7 +23,7 @@ export class ReadmanagerService {
   }
 
   private generateValue(): string {
-    return `${READ_VALUE}:${(new Date()).toISOString()}`;
+    return `${READ_VALUE}:${new Date().toISOString()}`;
   }
 
   private parseValue(value: string): ReadStateValue {
@@ -48,8 +47,7 @@ export class ReadmanagerService {
       return false;
     }
     const parsed = this.parseValue(value);
-    return parsed.state === READ_VALUE &&
-      !Number.isNaN(parsed.date.getTime());
+    return parsed.state === READ_VALUE && !Number.isNaN(parsed.date.getTime());
   }
 
   isExpired(date: Date): boolean {

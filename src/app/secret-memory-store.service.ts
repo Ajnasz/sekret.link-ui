@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Secret } from './secret';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SecretMemoryStoreService {
   secret: Secret;
@@ -21,7 +21,7 @@ export class SecretMemoryStoreService {
     this.password = password;
   }
 
-  get(): {secret: Secret, password: string} {
+  get(): { secret: Secret; password: string } {
     const secret: Secret = this.secret;
     const password = this.password;
     this.resetSecret();
