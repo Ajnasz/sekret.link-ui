@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Secret } from '../secret';
 
@@ -7,13 +7,7 @@ import { Secret } from '../secret';
   templateUrl: './secret.component.html',
   styleUrls: ['./secret.component.css']
 })
-export class SecretComponent implements OnInit {
+export class SecretComponent {
   @Input() secret: Secret;
   @Input() isReadonly = false;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

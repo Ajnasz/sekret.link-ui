@@ -8,9 +8,9 @@ describe('SecretComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SecretComponent ]
+      declarations: [SecretComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('SecretComponent', () => {
     fixture.detectChanges();
   });
 
-  /* it('should create', () => { */
-  /*   expect(component).toBeTruthy(); */
-  /* }); */
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

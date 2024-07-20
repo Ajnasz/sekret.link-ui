@@ -28,8 +28,8 @@ export class SecretService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T>(operation = 'operation', _?: T): (_: any) => Observable<T> {
-    return (error: any): Observable<T> => {
+  private handleError<T>(operation = 'operation'): (error: Error) => Observable<T> {
+    return (error: Error): Observable<T> => {
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
 
@@ -47,7 +47,7 @@ export class SecretService {
     url.pathname += `${secretID}/${secretKey}`;
     return this.http.get<Secret>(url.href, this.httpOptions)
       .pipe(
-        tap(_ => console.log(`fetch secret ${secretID}`)),
+        tap(() => console.log(`fetch secret ${secretID}`)),
         catchError(this.handleError<Secret>('getSecret'))
       );
   }
@@ -67,7 +67,7 @@ export class SecretService {
     }
     return this.http.post<Secret>(url.href, secret, this.httpOptions)
       .pipe(
-        tap(_ => console.log('secret created')),
+        tap(() => console.log('secret created')),
         catchError(this.handleError<Secret>('saveSecret'))
       );
   }

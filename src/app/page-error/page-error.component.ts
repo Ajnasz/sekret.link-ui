@@ -8,7 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PageErrorComponent implements OnInit {
   @Input() error: number;
   @Input() errorMessage: string;
-  constructor() { }
 
   ngOnInit(): void {
     if (!this.errorMessage) {

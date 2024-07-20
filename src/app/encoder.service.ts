@@ -5,9 +5,6 @@ import { AES, enc } from 'crypto-js';
   providedIn: 'root'
 })
 export class EncoderService {
-
-  constructor() { }
-
   encryptData(data: string, password: string): string {
     return AES.encrypt(data, password).toString();
   }
@@ -19,7 +16,7 @@ export class EncoderService {
   encodeKey(data: Uint8Array): string {
     return Array.prototype.map
       .call(new Uint8Array(data), (x: number) => ('00' + x.toString(16))
-            .slice(-2)).join('');
+        .slice(-2)).join('');
   }
 
   decodeKey(str: string): Uint8Array {

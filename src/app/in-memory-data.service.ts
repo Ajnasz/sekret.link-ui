@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpRequest, HttpHeaders } from '@angular/common/http';
 import {
   InMemoryDbService,
+  RequestCore,
   RequestInfo,
   ResponseOptions,
   STATUS,
   getStatusText,
-  ParsedRequestUrl,
 } from 'angular-in-memory-web-api';
 
 import { Secret } from './secret';
 
 function uuidv4(): string {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    /* tslint:disable:no-bitwise */
-    const r = Math.random() * 16 | 0;
+       const r = Math.random() * 16 | 0;
     const v = c === 'x' ? r : (r & 0x3 | 0x8);
-    /*tslint:enable*/
-    return v.toString(16);
+       return v.toString(16);
   });
 }
 
@@ -111,13 +109,21 @@ export class InMemoryDataService implements InMemoryDbService {
     return reqInfo.utils.createResponse$(() => this.createResponse(reqInfo));
   }
 
-  getJSONBody(req: HttpRequest<any>): Secret {
+  getJSONBody(req: HttpRequest<Secret>): Secret {
     return req.body;
+  }
+
+  private isSecretRequest(reqInfo: RequestCore): reqInfo is HttpRequest<Secret> {
+    return reqInfo.url.includes('secret');
   }
 
   post(reqInfo: RequestInfo): Observable<string> {
     const { req } = reqInfo;
-    const data = this.getJSONBody(req as HttpRequest<any>);
+    if (!this.isSecretRequest(req)) {
+      return of('');
+    }
+
+    const data = this.getJSONBody(req);
     data.Created = new Date();
     data.UUID = this.genId();
     data.Key =  (Math.round(Math.random() * 1e16)).toString(16) +  (Math.round(Math.random() * 1e16)).toString(16);

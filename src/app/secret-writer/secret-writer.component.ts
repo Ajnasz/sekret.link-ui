@@ -14,10 +14,10 @@ const ONE_WEEK = '168h';
 const THIRTY_DAYS = '720h';
 
 type EXPIRE_DURATIONS = '1h' | '24h' | '168h' | '720h';
-type ExpireDurationValue = {
+interface ExpireDurationValue {
   text: string;
   value: EXPIRE_DURATIONS;
-};
+}
 
 @Component({
   selector: 'app-secret-writer',

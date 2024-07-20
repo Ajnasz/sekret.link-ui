@@ -18,8 +18,8 @@ export class SecretCreatedComponent implements OnInit, AfterViewInit {
   password: string;
   decryptData: string;
   errorMessage = '';
-  copied: boolean = false;
-  animate: boolean = false;
+  copied = false;
+  animate = false;
   private destroyProgress: 'init' | 'progress' | 'finished' | null = null;
   destroyed = false;
 
