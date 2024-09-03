@@ -76,11 +76,11 @@
   input,
   textarea,
   select {
-    @apply accent-sekret-600 bg-white focus-visible:ring-2 focus-visible:ring-sekret-600 focus:outline-none focus:ring-2 focus:ring-sekret-600 invalid:ring-2 invalid:ring-sekret-200 ring-2 ring-sekret-200 rounded shadow-sm;
+    @apply accent-sekret-600 w-full bg-white focus-visible:ring-2 focus-visible:ring-sekret-600 focus:outline-none focus:ring-2 focus:ring-sekret-600 invalid:ring-1 invalid:ring-sekret-500 ring-1 ring-sekret-500 rounded shadow-sm disabled:bg-gray-100;
   }
 
   select:not([size]) {
-    @apply pl-3 pr-8 py-2 border bg-no-repeat appearance-none block w-full sm:w-auto;
+    @apply pl-3 pr-8 py-2 border bg-no-repeat appearance-none block w-full;
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'%3E%3Cpath stroke='%2398337b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 1 4 4 4-4'/%3E%3C/svg%3E");
     background-position: right 0.75rem center;
     background-size: 0.75em 0.75em;
@@ -99,8 +99,8 @@
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 12'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M1 5.917 5.724 10.5 15 1.5'/%3E%3C/svg%3E");
     background-size: 0em 0em;
     transition:
-      all 0.3s ease-in-out,
-      background-size 0.2s ease-in-out 0.3s;
+      all 0.2s ease-in-out,
+      background-size 0.1s ease-in-out 0.2s;
     box-shadow: inset 0 0 0 1.25em #fff;
   }
 
