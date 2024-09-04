@@ -76,7 +76,10 @@
   input,
   textarea,
   select {
-    @apply accent-sekret-600 w-full bg-white focus-visible:ring-2 focus-visible:ring-sekret-600 focus:outline-none focus:ring-2 focus:ring-sekret-600 invalid:ring-1 invalid:ring-sekret-500 ring-1 ring-sekret-500 rounded shadow-sm disabled:bg-gray-100;
+    @apply accent-sekret-600 w-full bg-white
+    focus-visible:ring-sekret-600 focus:outline-none focus:ring-2
+    focus:ring-sekret-600 rounded shadow-sm
+    disabled:bg-gray-100;
   }
 
   select:not([size]) {
@@ -92,7 +95,7 @@
   }
 
   input[type='checkbox'] {
-    @apply inline-block appearance-none text-white bg-no-repeat bg-center bg-contain;
+    @apply inline-block appearance-none text-white bg-no-repeat bg-center bg-contain focus:ring-2 focus:ring-sekret-600;
     width: 1.25em;
     height: 1.25em;
     line-height: 1.25em;
