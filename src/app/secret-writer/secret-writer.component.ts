@@ -36,9 +36,7 @@ export class SecretWriterComponent implements OnInit {
   selectedExpiration: EXPIRE_DURATIONS = '24h';
   maxReads = 1;
 
-  get shareWithTeam(): boolean {
-    return this.maxReads > 1;
-  }
+  shareWithTeam: false;
 
   constructor(
     private secretService: SecretService,
@@ -52,6 +50,11 @@ export class SecretWriterComponent implements OnInit {
   validateSecret(): boolean {
     if (this.secret.Data === '') {
       this.errorMessage = 'Secret must not be empty';
+      return false;
+    }
+
+    if (this.maxReads === null) {
+      this.errorMessage = 'Please set how many users can read the message';
       return false;
     }
 
@@ -97,7 +100,7 @@ export class SecretWriterComponent implements OnInit {
   }
 
   toggleShareWithGroup(): void {
-    if (this.shareWithTeam) {
+    if (!this.shareWithTeam) {
       this.maxReads = 1;
       return;
     }
