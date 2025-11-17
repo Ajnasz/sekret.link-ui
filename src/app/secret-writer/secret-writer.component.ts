@@ -6,7 +6,6 @@ import { SecretService } from '../secret.service';
 import { EncoderService } from '../encoder.service';
 import { TitleService } from '../title.service';
 import { SecretMemoryStoreService } from '../secret-memory-store.service';
-import { ReadmanagerService } from '../readmanager.service';
 
 const ONE_HOUR = '1h';
 const ONE_DAY = '24h';
@@ -43,8 +42,7 @@ export class SecretWriterComponent implements OnInit {
     private encoderService: EncoderService,
     private router: Router,
     private titleService: TitleService,
-    private memoryStore: SecretMemoryStoreService,
-    private readManager: ReadmanagerService
+    private memoryStore: SecretMemoryStoreService
   ) {}
 
   validateSecret(): boolean {
@@ -76,7 +74,6 @@ export class SecretWriterComponent implements OnInit {
       .subscribe(
         (secret: Secret) => {
           this.memoryStore.store(secret, password);
-          this.readManager.setRead(secret.UUID);
           this.router.navigate(['/created']);
         },
         error => {
