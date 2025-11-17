@@ -12,6 +12,7 @@ import { TitleService } from '../title.service';
   templateUrl: './privacy.component.html',
   styleUrls: ['./privacy.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class PrivacyComponent implements OnInit {
   constructor(

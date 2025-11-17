@@ -10,6 +10,7 @@ import {
   templateUrl: './page-logo.component.html',
   styleUrls: ['./page-logo.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class PageLogoComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) {}

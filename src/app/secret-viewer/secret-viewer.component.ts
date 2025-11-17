@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-secret-viewer',
   templateUrl: './secret-viewer.component.html',
   styleUrls: ['./secret-viewer.component.css'],
+  standalone: false,
 })
 export class SecretViewerComponent implements OnInit {
   secret: Secret;

@@ -15,6 +15,7 @@ import { TitleService } from '../title.service';
   selector: 'app-secret-created',
   templateUrl: './secret-created.component.html',
   styleUrls: ['./secret-created.component.css'],
+  standalone: false,
 })
 export class SecretCreatedComponent implements OnInit, AfterViewInit {
   @ViewChild('newURLInput') newURLInput: ElementRef;

@@ -22,6 +22,7 @@ interface ExpireDurationValue {
   selector: 'app-secret-writer',
   templateUrl: './secret-writer.component.html',
   styleUrls: ['./secret-writer.component.css'],
+  standalone: false,
 })
 export class SecretWriterComponent implements OnInit {
   errorMessage = '';

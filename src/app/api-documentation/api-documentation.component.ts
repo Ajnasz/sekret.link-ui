@@ -12,6 +12,7 @@ import { TitleService } from '../title.service';
   templateUrl: './api-documentation.component.html',
   styleUrls: ['./api-documentation.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ApiDocumentationComponent implements OnInit {
   constructor(

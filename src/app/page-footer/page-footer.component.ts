@@ -10,6 +10,7 @@ import {
   templateUrl: './page-footer.component.html',
   styleUrls: ['./page-footer.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class PageFooterComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) {}

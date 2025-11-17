@@ -6,6 +6,7 @@ import { Secret } from '../secret';
   selector: 'app-secret',
   templateUrl: './secret.component.html',
   styleUrls: ['./secret.component.css'],
+  standalone: false,
 })
 export class SecretComponent {
   @Input() secret: Secret;

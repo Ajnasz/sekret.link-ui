@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-page-error',
   templateUrl: './page-error.component.html',
   styleUrls: ['./page-error.component.css'],
+  standalone: false,
 })
 export class PageErrorComponent implements OnInit {
   @Input() error: number;
