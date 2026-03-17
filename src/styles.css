@@ -70,7 +70,7 @@
   }
 
   a {
-    @apply text-sekret-600 hover:text-sekret-800 focus:ring-sekret-400 focus-visible:ring-sekret-400;
+    @apply text-sekret-600 hover:text-sekret-800 focus:ring-sekret-400 focus-visible:ring-sekret-400 cursor-pointer;
   }
 
   input,
