@@ -7,8 +7,8 @@ import { SecretCreatedComponent } from './secret-created/secret-created.componen
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/create', pathMatch: 'full' },
-  { path: 'create', component: SecretWriterComponent },
+  { path: '', component: SecretWriterComponent, pathMatch: 'full' },
+  { path: 'create', redirectTo: '/', pathMatch: 'full' },
   { path: 'created', component: SecretCreatedComponent },
   { path: 'view/:id', component: SecretViewerComponent },
   { path: '404', component: NotFoundComponent },
